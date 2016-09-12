@@ -1,41 +1,24 @@
 {
-  "name": "App",
-  "version": "0.0.1",
+  "name": "WodMeUp",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "clean": "watchman watch-del-all",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "storybook": "start-storybook -p 9001 -c web/.storybook",
-    "ios": "react-native run-ios",
-    "and": "react-native run-android",
-    "build-and": "react-native run-android",
-    "web": "webpack-dev-server --port 3000 --config web/webpack.config.dev.js --inline --hot --colors --quiet",
-    "build-web": "webpack --config web/webpack.config.dev.js --inline --hot --colors --quiet",
-    "chrome": "webpack-dev-server --port 3001  --config chrome/webpack.config.chrome.js --inline  --colors --quiet",
-    "build-chrome": "webpack --config chrome/webpack.config.chrome.js --inline  --colors --quiet "
+  "devDependencies": {
+    "react-scripts": "0.4.1"
   },
   "dependencies": {
-    "eslint": "^3.5.0",
-    "eslint-plugin-react": "^6.2.0",
-    "lodash": "^4.15.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
-    "react-native": "^0.32.1",
-    "react-native-web": "0.0.43",
-    "url-loader": "^0.5.7",
-    "write-file-webpack-plugin": "^3.3.0"
+    "react-native": "^0.33.0",
+    "react-native-web": "0.0.45"
   },
-  "devDependencies": {
-    "@kadira/storybook": "1.28.1",
-    "babel-core": "6.9.1",
-    "babel-loader": "6.2.4",
-    "babel-plugin-transform-decorators-legacy": "1.3.4",
-    "babel-preset-es2015": "6.9.0",
-    "babel-preset-react": "6.5.0",
-    "babel-preset-stage-1": "6.5.0",
-    "babel-runtime": "6.9.2",
-    "webpack": "1.13.1",
-    "webpack-dev-server": "1.14.1",
-    "write-file-webpack-plugin": "^3.1.8"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "react-native--start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/react-scripts/config/eslint.js"
   }
 }

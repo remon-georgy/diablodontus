@@ -20,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace5
+project.xcworkspace
 
 # Android/IJ
 #
@@ -39,12 +39,3 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
-
-# WEB
-#
-dist/
-
-# OTHERS
-notes.txt
-chrome/bundle.js
-chrome/bundle.js.map

@@ -26,7 +26,7 @@ export default class WorkoutsListView extends Component {
   }
   
   getWorkouts() {
-    return fetch('http://192.168.1.108:8800/workouts')
+    return fetch('/workouts')
       .then((response) => response.json())
       .then((responseJson) => {
         return responseJson;

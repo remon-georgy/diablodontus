@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://192.168.1.108:8800",
   "devDependencies": {
+    "flow-bin": "^0.32.0",
     "react-scripts": "0.4.1"
   },
   "dependencies": {

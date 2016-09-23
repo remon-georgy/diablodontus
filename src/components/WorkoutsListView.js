@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { ListView, Text } from 'react-native';
+import { ListView } from 'react-native';
 import WorkoutView from './WorkoutView';
 
 export default class WorkoutsListView extends Component {

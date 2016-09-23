@@ -39,16 +39,86 @@ export class WorkoutMovement extends Component {
   }
 }
 
-export class RepScheme extends Component {
+export class Rounds extends Component {
   render() {
-    const repScheme = Array.from({length: this.props.cluster.rounds}, (k, $round) => {
-      console.log($round);
-      // TODO find an alternative to eval()
-      return eval(this.props.cluster.repScheme);
-    }).join('/');
-    console.log('repScheme', repScheme);
+    const rounds = _.get(this.props.cluster, 'rounds', null);
+    const repScheme = _.get(this.props.cluster, 'repScheme', null);
+    if (rounds && repScheme) {
+      const output = Array.from({length: this.props.cluster.rounds}, (k, $round) => {
+        // TODO find an alternative to eval()
+        return eval(this.props.cluster.repScheme);
+      }).join('-');
+      return (
+        <Text>{output} reps</Text>
+      );
+    }
+    else if(repScheme && _.isArray(repScheme)) {
+      return <Text>{repScheme.join('-')} reps</Text>;
+    }
+    else if(rounds) {
+      return <Text>{rounds} rounds</Text>;
+    }
+    return null;
+  }
+}
+
+export class Timing extends Component {
+  render() {
+    if (_.isObject(this.props.timing) && !_.isEmpty(this.props.timing)) {
+      let timing;
+      switch (this.props.timing.type) {
+        case 'AMRAP':
+          // TODO refactor to moment.js
+          timing = `AMRAP ${this.props.timing.timeCap / 60} minutes`;
+          break;
+        case 'FixedInterval':
+          // If there's a reminder (90, 150..etc) just print seconds as is.
+          if (this.props.timing.time === 60) {
+            timing = 'EMOM';
+          }
+          else if (this.props.timing.time % 60) {
+            timing = `E${this.props.timing.time}sOM`;
+          }
+          else {
+            timing = `E${this.props.timing.time / 60}MOM`;
+          }
+          timing += ` for ${this.props.timing.count} rounds`;
+          break;
+        case 'TimedRounds':
+          
+          console.log('this.props.timing', this.props.timing);
+          console.log('timing', timing);
+          
+      }
+      // const timing = _.reduce(this.props.timing, (result, value, key) => {
+      //   result = result || '';
+      //   if (key === 'type') {
+      //     switch (value) {
+      //       case 'FixedInterval':
+      //         return result + 'EMOM';
+      //       case 'TimedRounds':
+      //         return result + 'Tabata';
+      //       default:
+      //         return result + value;
+      //     }
+      //   }
+      //   else {
+      //     result += value;
+      //   }
+      // });
+      
+      return (
+        <Text>{timing}</Text>
+      );
+    }
+    return null;
+  }
+}
+
+export class Scoring extends Component {
+  render() {
     return (
-      <Text>{repScheme}</Text>
+      <Text>For {this.props.scoring}</Text>
     );
   }
 }
@@ -62,10 +132,8 @@ export class WorkoutClusterView extends Component {
     });
     return (
       <View>
-        {this.props.cluster.repScheme && this.props.cluster.rounds ?
-          <RepScheme cluster={this.props.cluster}/> :
-          null}
-          {/* <RepScheme cluster={this.props.cluster}/> */}
+        <Timing timing={this.props.cluster.timing}/>
+        <Rounds cluster={this.props.cluster}/>
         <View>{view}</View>
       </View>
     );
@@ -82,6 +150,7 @@ export default class WorkoutView extends Component {
     return (
       <View style={styles.Workout}>
         <Text style={styles.name}>{this.props.workout.name}</Text>
+        <Scoring scoring={this.props.workout.scoring}/>
         <Text>{this.props.workout.scoring.name}</Text>
         <View>{clusters}</View>
       </View>

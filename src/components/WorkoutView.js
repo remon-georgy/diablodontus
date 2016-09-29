@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import _ from 'lodash';
 
+// TODO refactor into an SFC.
 export class WorkoutMovement extends Component {
   renderableMovement(unit) {
     let parts = [unit.movement.name];
@@ -39,123 +40,113 @@ export class WorkoutMovement extends Component {
   }
 }
 
-export class Rounds extends Component {
-  render() {
-    const rounds = _.get(this.props.cluster, 'rounds', null);
-    const repScheme = _.get(this.props.cluster, 'repScheme', null);
-    if (rounds && repScheme) {
-      const output = Array.from({length: this.props.cluster.rounds}, (k, $round) => {
-        // TODO find an alternative to eval()
-        return eval(this.props.cluster.repScheme);
-      }).join('-');
-      return (
-        <Text>{output} reps</Text>
-      );
-    }
-    else if(repScheme && _.isArray(repScheme)) {
-      return <Text>{repScheme.join('-')} reps</Text>;
-    }
-    else if(rounds) {
-      return <Text>{rounds} rounds</Text>;
-    }
-    return null;
-  }
-}
-
-export class Timing extends Component {
-  render() {
-    if (_.isObject(this.props.timing) && !_.isEmpty(this.props.timing)) {
-      let timing;
-      switch (this.props.timing.type) {
-        case 'AMRAP':
-          // TODO refactor to moment.js
-          timing = `AMRAP ${this.props.timing.timeCap / 60} minutes`;
-          break;
-        case 'FixedInterval':
-          // If there's a reminder (90, 150..etc) just print seconds as is.
-          if (this.props.timing.time === 60) {
-            timing = 'EMOM';
-          }
-          else if (this.props.timing.time % 60) {
-            timing = `E${this.props.timing.time}sOM`;
-          }
-          else {
-            timing = `E${this.props.timing.time / 60}MOM`;
-          }
-          timing += ` for ${this.props.timing.count} rounds`;
-          break;
-        case 'TimedRounds':
-          
-          console.log('this.props.timing', this.props.timing);
-          console.log('timing', timing);
-          
-      }
-      // const timing = _.reduce(this.props.timing, (result, value, key) => {
-      //   result = result || '';
-      //   if (key === 'type') {
-      //     switch (value) {
-      //       case 'FixedInterval':
-      //         return result + 'EMOM';
-      //       case 'TimedRounds':
-      //         return result + 'Tabata';
-      //       default:
-      //         return result + value;
-      //     }
-      //   }
-      //   else {
-      //     result += value;
-      //   }
-      // });
-      
-      return (
-        <Text>{timing}</Text>
-      );
-    }
-    return null;
-  }
-}
-
-export class Scoring extends Component {
-  render() {
+const Rounds = ({cluster}) => {
+  const rounds = _.get(cluster, 'rounds', null);
+  const repScheme = _.get(cluster, 'repScheme', null);
+  if (rounds && repScheme) {
+    const output = Array.from({length: cluster.rounds}, (k, $round) => {
+      // TODO find an alternative to eval()
+      return eval(cluster.repScheme);
+    }).join('-');
     return (
-      <Text>For {this.props.scoring}</Text>
+      <Text>{output} reps</Text>
     );
   }
+  else if(repScheme && _.isArray(repScheme)) {
+    return <Text>{repScheme.join('-')} reps</Text>;
+  }
+  else if(rounds) {
+    return <Text>{rounds} rounds</Text>;
+  }
+  return null;
 }
 
-export class WorkoutClusterView extends Component {
-  render() {
-    let view = this.props.cluster.units.map((unit, i) => {
-      return (
-        <WorkoutMovement key={i} unit={unit}/>
-      );
-    });
+const Timing = ({timing}) => {
+  if (_.isObject(timing) && !_.isEmpty(timing)) {
+    let output;
+    switch (timing.type) {
+      case 'AMRAP':
+        // TODO refactor to moment.js
+        output = `AMRAP ${timing.timeCap / 60} minutes`;
+        break;
+      case 'FixedIntervals':
+        // If there's a reminder (90, 150..etc) just print seconds as is.
+        if (timing.time === 60) {
+          output = 'EMOM';
+        }
+        else if (timing.time % 60) {
+          output = `E${timing.time}sOM`;
+        }
+        else {
+          output = `E${timing.time / 60}MOM`;
+        }
+        output += ` for ${timing.count} rounds`;
+        break;
+      case 'TimedRounds':
+        
+        console.log('timing', timing);
+        console.log('timing', timing);
+        
+    }
+    // const timing = _.reduce(timing, (result, value, key) => {
+    //   result = result || '';
+    //   if (key === 'type') {
+    //     switch (value) {
+    //       case 'FixedIntervals':
+    //         return result + 'EMOM';
+    //       case 'TimedRounds':
+    //         return result + 'Tabata';
+    //       default:
+    //         return result + value;
+    //     }
+    //   }
+    //   else {
+    //     result += value;
+    //   }
+    // });
+    
     return (
-      <View>
-        <Timing timing={this.props.cluster.timing}/>
-        <Rounds cluster={this.props.cluster}/>
-        <View>{view}</View>
-      </View>
+      <Text>{output}</Text>
     );
   }
+  return null;
 }
 
-export default class WorkoutView extends Component {
-  render() {
-    var clusters = this.props.workout.clusters.map((cluster, i) => {
-      return (
-        <WorkoutClusterView key={i} cluster={cluster}/>
-      );
-    });
+const Scoring = ({scoring}) => {
+  return (
+    <Text>For {scoring}</Text>
+  );
+}
+
+const WorkoutClusterView = ({cluster}) => {
+  let view = cluster.units.map((unit, i) => {
     return (
-      <View style={styles.Workout}>
-        <Text style={styles.name}>{this.props.workout.name}</Text>
-        <Scoring scoring={this.props.workout.scoring}/>
-        <Text>{this.props.workout.scoring.name}</Text>
-        <View>{clusters}</View>
-      </View>
+      <WorkoutMovement key={i} unit={unit}/>
     );
-  }
+  });
+  return (
+    <View>
+      <Timing timing={cluster.timing}/>
+      <Rounds cluster={cluster}/>
+      <View>{view}</View>
+    </View>
+  );
+}
+
+const WorkoutView = ({workout}) => {
+  var clusters = workout.clusters.map((cluster, i) => {
+    return (
+      <WorkoutClusterView key={i} cluster={cluster}/>
+    );
+  });
+  return (
+    <View style={styles.Workout}>
+      <Text style={styles.name}>{workout.name}</Text>
+      <Scoring scoring={workout.scoring}/>
+      <Text>{workout.scoring.name}</Text>
+      <View>{clusters}</View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -174,3 +165,5 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
 });
+
+export default WorkoutView;

@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ListView } from 'react-native';
 import WorkoutView from './WorkoutView';
 
+// TODO refactor into an SFC.
 export default class WorkoutsListView extends Component {
 
   constructor(props) {

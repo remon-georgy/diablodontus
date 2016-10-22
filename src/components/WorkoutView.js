@@ -56,7 +56,7 @@ const Rounds = ({cluster}) => {
     return <Text>{repScheme.join('-')} reps</Text>;
   }
   else if(rounds) {
-    return <Text>{rounds} rounds</Text>;
+    return <Text>{rounds} Rounds</Text>;
   }
   return null;
 }
@@ -80,7 +80,7 @@ const Timing = ({timing}) => {
         else {
           output = `E${timing.time / 60}MOM`;
         }
-        output += ` for ${timing.count} rounds`;
+        output += ` for ${timing.intervals} Rounds`;
         break;
       case 'TimedRounds':
         
@@ -112,11 +112,24 @@ const Timing = ({timing}) => {
   return null;
 }
 
-const Scoring = ({scoring}) => {
-  return (
-    <Text>For {scoring}</Text>
-  );
-}
+const Scoring = ({scoring}) => <Text>For {scoring}</Text>
+
+const styles = StyleSheet.create({
+  base: {
+    padding: 5,
+  },
+  name: {
+    fontWeight: 'bold',
+    paddingBottom: 5
+  },
+  Workout: {
+    padding: 20,
+    borderRadius: 3,
+  },
+  text: {
+    color: '#FFF',
+  },
+});
 
 const WorkoutClusterView = ({cluster}) => {
   let view = cluster.units.map((unit, i) => {
@@ -149,21 +162,5 @@ const WorkoutView = ({workout}) => {
   );
 }
 
-const styles = StyleSheet.create({
-  base: {
-    padding: 5,
-  },
-  name: {
-    fontWeight: 'bold',
-    paddingBottom: 5
-  },
-  Workout: {
-    padding: 20,
-    borderRadius: 3,
-  },
-  text: {
-    color: '#FFF',
-  },
-});
-
 export default WorkoutView;
+

@@ -18,11 +18,38 @@ const styles = StyleSheet.create({
   }
 });
 
+function getWorkouts() {
+  return fetch('/workouts')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      return responseJson;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 export default class WodMeUp extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      workouts: []
+    }
+  }
+  
+  componentWillMount() {
+    const p = getWorkouts();
+    
+    p.then((workouts) => {
+      this.setState({workouts: workouts});
+    });
+  }
+  
   render() {
+    console.log('WodMeUp.render');
     return (
       <View style={styles.container}>
-        <WorkoutsListView/>
+        <WorkoutsListView workouts={this.state.workouts}/>
       </View>
     );
   }

@@ -4,19 +4,36 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import _ from 'lodash';
+import {isArray, get, isObject, isEmpty, reduce} from 'lodash';
+
+const styles = StyleSheet.create({
+  base: {
+    padding: 5,
+  },
+  name: {
+    fontWeight: 'bold',
+    paddingBottom: 5
+  },
+  Workout: {
+    padding: 20,
+    borderRadius: 3,
+  },
+  text: {
+    color: '#FFF',
+  },
+});
 
 // TODO refactor into an SFC.
 export class WorkoutMovement extends Component {
   renderableMovement(unit) {
     let parts = [unit.movement.name];
-    return parts = _.reduce(unit.rx, (result, value, key) => {
+    return parts = reduce(unit.rx, (result, value, key) => {
       result = result || [];
       if (key === 'reps') {
         result.unshift(value);
       }
       else {
-        if (_.isArray(value)) {
+        if (isArray(value)) {
           result.push(`(${value.join('/')})`);
         }
         else {
@@ -41,8 +58,8 @@ export class WorkoutMovement extends Component {
 }
 
 const Rounds = ({cluster}) => {
-  const rounds = _.get(cluster, 'rounds', null);
-  const repScheme = _.get(cluster, 'repScheme', null);
+  const rounds = get(cluster, 'rounds', null);
+  const repScheme = get(cluster, 'repScheme', null);
   if (rounds && repScheme) {
     const output = Array.from({length: cluster.rounds}, (k, $round) => {
       // TODO find an alternative to eval()
@@ -52,7 +69,7 @@ const Rounds = ({cluster}) => {
       <Text>{output} reps</Text>
     );
   }
-  else if(repScheme && _.isArray(repScheme)) {
+  else if(repScheme && isArray(repScheme)) {
     return <Text>{repScheme.join('-')} reps</Text>;
   }
   else if(rounds) {
@@ -62,7 +79,7 @@ const Rounds = ({cluster}) => {
 }
 
 const Timing = ({timing}) => {
-  if (_.isObject(timing) && !_.isEmpty(timing)) {
+  if (isObject(timing) && !isEmpty(timing)) {
     let output;
     switch (timing.type) {
       case 'AMRAP':
@@ -88,7 +105,7 @@ const Timing = ({timing}) => {
         console.log('timing', timing);
         
     }
-    // const timing = _.reduce(timing, (result, value, key) => {
+    // const timing = reduce(timing, (result, value, key) => {
     //   result = result || '';
     //   if (key === 'type') {
     //     switch (value) {
@@ -113,23 +130,6 @@ const Timing = ({timing}) => {
 }
 
 const Scoring = ({scoring}) => <Text>For {scoring}</Text>
-
-const styles = StyleSheet.create({
-  base: {
-    padding: 5,
-  },
-  name: {
-    fontWeight: 'bold',
-    paddingBottom: 5
-  },
-  Workout: {
-    padding: 20,
-    borderRadius: 3,
-  },
-  text: {
-    color: '#FFF',
-  },
-});
 
 const WorkoutClusterView = ({cluster}) => {
   let view = cluster.units.map((unit, i) => {

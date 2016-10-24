@@ -30,7 +30,7 @@ export class WorkoutMovement extends Component {
   render() {
     return (
       <View>
-         <View style={[styles.base, {flexDirection: 'row'}]}>
+        <View style={[styles.base, {flexDirection: 'row'}]}>
           <Text className="Movement">{
             this.renderableMovement(this.props.unit)
           }</Text>

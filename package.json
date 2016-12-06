@@ -8,10 +8,12 @@
     "react-scripts": "0.7.0"
   },
   "dependencies": {
+    "flow-bin": "^0.35.0",
+    "mathjs": "^3.7.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-native": "^0.35.0",
-    "react-native-web": "^0.0.46"
+    "react-native-web": "0.0.46"
   },
   "scripts": {
     "start": "react-scripts start",

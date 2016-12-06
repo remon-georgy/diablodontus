@@ -2,14 +2,22 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
 import WorkoutView from './WorkoutView';
 
 export default class WorkoutsListView extends Component {
+  static propTypes = {
+    workouts: PropTypes.array.isRequired
+  }
+  
   render() {
     const { workouts } = this.props
-    const rows = workouts.map((workout) => <WorkoutView key={workout.name} workout={workout}/>);
+    const rows = workouts.map((workout, i) => {
+      console.log(workout);
+      //const { name, scoring, clusters} = workout
+      return <WorkoutView {...workout} key={i}/>
+    });
 
     return (
       <ScrollView>
@@ -20,5 +28,5 @@ export default class WorkoutsListView extends Component {
 }
 
 WorkoutsListView.propTypes = {
-  workouts: React.PropTypes.array.isRequired
+  workouts: PropTypes.array.isRequired
 }

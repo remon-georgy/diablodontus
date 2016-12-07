@@ -4,7 +4,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import {get, isEmpty, reduce} from 'lodash';
+import {isEmpty, reduce} from 'lodash';
 import math from 'mathjs'
 
 const styles = StyleSheet.create({
@@ -26,9 +26,16 @@ const styles = StyleSheet.create({
 
 // TODO refactor
 export class WorkoutMovement extends Component {
-  renderableMovement(unit) {
-    let parts = [unit.movement.name];
-    return parts = reduce(unit.rx, (result, value, key) => {
+  renderableMovement({rx, notes, movement}) {
+    let parts = [movement.name];
+
+    if(rx.reps && typeof rx.reps === 'string' && rx.reps.indexOf('./') > -1) {
+      const attr = rx.reps.replace('./', '')
+      rx.reps = rx[attr]
+      delete rx[attr]
+    }
+
+    parts = reduce(rx, (result, value, key) => {
       result = result || [];
       if (typeof value === 'string') {
         value = value.replace('$', '');
@@ -40,12 +47,20 @@ export class WorkoutMovement extends Component {
         if (Array.isArray(value)) {
           result.push(value.join('/'));
         }
+        else if (typeof value === 'string') {
+          result.push(value);
+        }
         else {
           result.push(value);
         }
       }
       return result;
-    }, parts).join(' ');
+    }, parts)
+    
+    if (notes) {
+      parts.push(`(${notes.join('. ')})`)
+    }
+    return parts.join(' ');
   }
   
   render() {
@@ -60,82 +75,6 @@ export class WorkoutMovement extends Component {
     );
   }
 }
-//
-// // Destructure cluster object
-// const Rounds = ({cluster}) => {
-//   const rounds = get(cluster, 'rounds', null);
-//   const repScheme = get(cluster, '', null);
-//   if (rounds && ) {
-//     const output = Array.from({length: cluster.rounds}, (k, $round) => {
-//       // TODO find an alternative to eval()
-//       return cluster.;
-//     }).join('-');
-//     return (
-//       <Text>{output} reps</Text>
-//     );
-//   }
-//   else if( && Array.isArray()) {
-//     return <Text>{.join('-')} reps</Text>;
-//   }
-//   else if(rounds) {
-//     return <Text>{rounds} Rounds</Text>;
-//   }
-//   return null;
-// }
-
-const TimingOLD = ({timing}) => {
-  const output = timing.type;
-    switch (timing.type) {
-      case 'NoTiming':
-      default:
-        return null
-         
-     
-   }
-  //     // TODO refactor to moment.js
-  //     output = `AMRAP ${timing.timeCap / 60} minutes`;
-  //     break;
-  //   case 'FixedIntervals':
-  //     // If there's a reminder (90, 150..etc) just print seconds as is.
-  //     if (timing.time === 60) {
-  //       output = 'EMOM';
-  //     }
-  //     else if (timing.time % 60) {
-  //       output = `E${timing.time}sOM`;
-  //     }
-  //     else {
-  //       output = `E${timing.time / 60}MOM`;
-  //     }
-  //     output += ` for ${timing.intervals} Rounds`;
-  //     break;
-  //   case 'TimedRounds':
-  //
-  //     console.log('timing', timing);
-  //     console.log('timing', timing);
-  //
-  // }
-  // const timing = reduce(timing, (result, value, key) => {
-  //   result = result || '';
-  //   if (key === 'type') {
-  //     switch (value) {
-  //       case 'FixedIntervals':
-  //         return result + 'EMOM';
-  //       case 'TimedRounds':
-  //         return result + 'Tabata';
-  //       default:
-  //         return result + value;
-  //     }
-  //   }
-  //   else {
-  //     result += value;
-  //   }
-  // });
-  
-  return (
-    <Text>{output}</Text>
-  );
-}
-
 
 /****************************************************
  * Workout -> Scoring
@@ -146,25 +85,24 @@ Scoring.propTypes = {
 }
 
 /****************************************************
- * Workout -> Cluster -> Timing -> FixedIntervalsTiming
+ * Workout -> Cluster -> Timing -> FixedCyclesTiming
  ***************************************************/
-const FixedIntervalsTiming = ({alias, deathBy, time, intervals}) => {
+const FixedCyclesTiming = ({alias, deathBy, time, cycles}) => {
   let parts = []
   if (alias) {
     parts.push(alias)
   }
   else {
-    parts.push('Each')
-    const interval = (time % 60 > 0) ?
+    const cycle = (time % 60 > 0) ?
       `${time} seconds`:
-      `${time / 60} Minute`
-    parts.push(interval)
-    parts.push('For')
-    parts.push(intervals)
-    parts.push('rounds')
+      `${time / 60} minutes`
+    parts.push(cycles)
+    parts.push('cycles of ')
+    parts.push(cycle)
+    parts.push('each')
   }
   if (deathBy) {
-    parts.push('(Score is total number of rounds completed, plus number of reps completed in first incomplete round)')
+    parts.push('(Score is total number of completed cycles, plus number of reps completed in first incomplete cycle.)')
   }
   
   return <Text>{parts.join(' ')}</Text>
@@ -179,7 +117,7 @@ const CappedTiming = ({alias, timeCap}) => {
     parts.push(alias)
   }
   else {
-    parts = parts.concat(['AMRAP', 'in', timeCap / 60, 'minutes'])
+    parts = parts.concat(['In', timeCap / 60, 'minutes'])
   }
   
   return <Text>{parts.join(' ')}</Text>
@@ -191,9 +129,9 @@ const CappedTiming = ({alias, timeCap}) => {
 const Timing = ({type, ...rest}) => {
   let output
   switch (type) {
-    // EMOM, Tabata, Fixed intervals in general
-    case 'FixedIntervals':
-      output = <FixedIntervalsTiming {...rest} />
+    // EMOM, Tabata, Fixed cycles in general
+    case 'FixedCycles':
+      output = <FixedCyclesTiming {...rest} />
       break;
       
     case 'Capped':
@@ -204,8 +142,6 @@ const Timing = ({type, ...rest}) => {
       output = null
   }
   return output
-  
-  
 }
 Timing.propTypes = {
   type: PropTypes.string.isRequired
@@ -215,9 +151,8 @@ Timing.propTypes = {
  * Workout -> Cluster -> RepScheme
  ***************************************************/
 const RepScheme = ({repScheme}) => {
-  
   if (Array.isArray(repScheme)) {
-    return <Text>{repScheme.join('-') + ' reps'}</Text>
+    return <Text>{repScheme.join(', ') + ' reps'}</Text>
   }
   else if (typeof repScheme === 'string') {
     return <Text>{repScheme}</Text>
@@ -237,7 +172,7 @@ const RepScheme = ({repScheme}) => {
 /****************************************************
  * Workout -> Cluster
  ***************************************************/
-const Cluster = ({name, timing, units, rounds, restBetweenRounds, repScheme}) => {
+const Cluster = ({name, timing, units, rounds, builtinRest, repScheme, notes}) => {
   const unitsRend = units.map((unit, u) => {
     return (
       <WorkoutMovement key={u} unit={unit}/>
@@ -245,17 +180,17 @@ const Cluster = ({name, timing, units, rounds, restBetweenRounds, repScheme}) =>
   });
   
   let suffix
-  if (restBetweenRounds) {
-    const {value, unit} = restBetweenRounds
+  if (builtinRest) {
+    const {value, unit, between} = builtinRest
     const rest = math.unit(value, unit).to('minutes').toString()
-    suffix = `Rest ${rest} between rounds`
+    suffix = `Rest ${rest} between ${between}`
   }
 
   return (
     <View>
       {name && <Text>{name}</Text>}
-      {rounds && <Text>{rounds} Rounds</Text>}
       {timing && <Timing {...timing} /> }
+      {rounds && <Text>{rounds} Rounds</Text>}
       {repScheme && <RepScheme repScheme={repScheme} /> }
       <View>{unitsRend}</View>
       { !isEmpty(suffix) && <Text>{suffix}</Text> }
@@ -266,7 +201,7 @@ Cluster.propTypes = {
   timing: PropTypes.object.isRequired,
   units: PropTypes.array.isRequired,
   rounds: PropTypes.number,
-  restBetweenRounds: PropTypes.object,
+  builtinRest: PropTypes.object,
   notes: PropTypes.array,
 }
 
@@ -279,8 +214,6 @@ const WorkoutView = ({ name, scoring, clusters, notes}) => {
       key={i}
       {...cluster} />
   });
-  
-  console.log('notes', notes)
   
   return (
     <View style={styles.Workout}>

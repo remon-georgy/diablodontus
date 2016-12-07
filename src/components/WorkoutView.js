@@ -2,14 +2,11 @@
  * @flow
  */
 
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {isEmpty, reduce} from 'lodash';
 
 const styles = StyleSheet.create({
-  base: {
-    padding: 5,
-  },
   name: {
     fontWeight: 'bold',
     paddingBottom: 5
@@ -18,61 +15,51 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 3,
   },
-  text: {
-    color: '#FFF',
-  },
 });
 
 // TODO refactor
-export class WorkoutMovement extends Component {
-  renderableMovement({rx, notes, movement}) {
-    let parts = [movement.name];
+export const Unit = ({rx, notes, movement}) => {
+  let parts = [movement.name];
 
-    if(rx.reps && typeof rx.reps === 'string' && rx.reps.indexOf('./') > -1) {
-      const attr = rx.reps.replace('./', '')
-      rx.reps = rx[attr]
-      delete rx[attr]
+  if(rx.reps && typeof rx.reps === 'string' && rx.reps.indexOf('./') > -1) {
+    const attr = rx.reps.replace('./', '')
+    rx.reps = rx[attr]
+    delete rx[attr]
+  }
+
+  parts = reduce(rx, (result, value, key) => {
+    result = result || [];
+    if (typeof value === 'string') {
+      value = value.replace('$', '');
     }
-
-    parts = reduce(rx, (result, value, key) => {
-      result = result || [];
-      if (typeof value === 'string') {
-        value = value.replace('$', '');
+    if (key === 'reps') {
+      result.unshift(value);
+    }
+    else {
+      if (Array.isArray(value)) {
+        result.push(value.join('/'));
       }
-      if (key === 'reps') {
-        result.unshift(value);
+      else if (typeof value === 'string') {
+        result.push(value);
       }
       else {
-        if (Array.isArray(value)) {
-          result.push(value.join('/'));
-        }
-        else if (typeof value === 'string') {
-          result.push(value);
-        }
-        else {
-          result.push(value);
-        }
+        result.push(value);
       }
-      return result;
-    }, parts)
-    
-    if (notes) {
-      parts.push(`(${notes.join('. ')})`)
     }
-    return parts.join(' ');
-  }
+    return result;
+  }, parts)
   
-  render() {
-    return (
-      <View>
-        <View style={[styles.base, {flexDirection: 'row'}]}>
-          <Text className="Movement">{
-            this.renderableMovement(this.props.unit)
-          }</Text>
-        </View>
-      </View>
-    );
+  if (notes) {
+    parts.push(`(${notes.join('. ')})`)
   }
+  const rndr = parts.join(' ');
+  
+  return <Text>{rndr}</Text>;
+}
+Unit.propTypes = {
+  rx: PropTypes.object,
+  movement: PropTypes.object,
+  notes: PropTypes.array
 }
 
 /****************************************************
@@ -103,23 +90,33 @@ const FixedCyclesTiming = ({alias, deathBy, time, cycles}) => {
   if (deathBy) {
     parts.push('(Score is total number of completed cycles, plus number of reps completed in first incomplete cycle.)')
   }
-  
+
   return <Text>{parts.join(' ')}</Text>
+}
+FixedCyclesTiming.propTypes = {
+  alias: PropTypes.string,
+  deathBy: PropTypes.bool,
+  time: PropTypes.number.isRequired,
+  cycles: PropTypes.number
 }
 
 /****************************************************
  * Workout -> Cluster -> Timing -> CappedTiming
  ***************************************************/
-const CappedTiming = ({alias, timeCap}) => {
+const CappedTiming = ({alias, time}) => {
   let parts = []
   if (alias) {
     parts.push(alias)
   }
   else {
-    parts = parts.concat(['In', timeCap / 60, 'minutes'])
+    parts = parts.concat(['In', time / 60, 'minutes'])
   }
   
   return <Text>{parts.join(' ')}</Text>
+}
+CappedTiming.propTypes = {
+  alias: PropTypes.string,
+  time: PropTypes.number.isRequired
 }
 
 /****************************************************
@@ -167,6 +164,17 @@ const RepScheme = ({repScheme}) => {
   }
   return null;
 }
+RepScheme.propTypes = {
+  repScheme: PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.array,
+    React.PropTypes.shape({
+      init: React.PropTypes.number.isRequired,
+      step: React.PropTypes.number.isRequired,
+      end: React.PropTypes.number
+    }),
+  ]).isRequired,
+}
 
 /****************************************************
  * Workout -> Cluster
@@ -174,7 +182,7 @@ const RepScheme = ({repScheme}) => {
 const Cluster = ({name, timing, units, rounds, builtinRest, repScheme, notes}) => {
   const unitsRend = units.map((unit, u) => {
     return (
-      <WorkoutMovement key={u} unit={unit}/>
+      <Unit key={u} {...unit}/>
     );
   });
   
@@ -196,11 +204,21 @@ const Cluster = ({name, timing, units, rounds, builtinRest, repScheme, notes}) =
   );
 }
 Cluster.propTypes = {
+  name: PropTypes.string,
   timing: PropTypes.object.isRequired,
   units: PropTypes.array.isRequired,
   rounds: PropTypes.number,
   builtinRest: PropTypes.object,
   notes: PropTypes.array,
+  repScheme: PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.array,
+    React.PropTypes.shape({
+      init: React.PropTypes.number.isRequired,
+      step: React.PropTypes.number.isRequired,
+      end: React.PropTypes.number
+    }),
+  ])
 }
 
 /****************************************************

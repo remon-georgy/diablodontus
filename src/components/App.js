@@ -46,7 +46,6 @@ export default class WodMeUp extends Component {
   }
   
   render() {
-    console.log('WodMeUp.render');
     return (
       <View style={styles.container}>
         <WorkoutsListView workouts={this.state.workouts}/>

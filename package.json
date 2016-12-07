@@ -10,7 +10,7 @@
   "dependencies": {
     "react": "15.3.x",
     "react-dom": "15.3.x",
-    "react-native": "^0.37.0",
+    "react-native": "0.37.x",
     "react-native-web": "0.0.55"
   },
   "scripts": {

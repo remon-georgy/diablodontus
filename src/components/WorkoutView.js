@@ -5,7 +5,6 @@
 import React, { PropTypes, Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {isEmpty, reduce} from 'lodash';
-import math from 'mathjs'
 
 const styles = StyleSheet.create({
   base: {
@@ -182,8 +181,7 @@ const Cluster = ({name, timing, units, rounds, builtinRest, repScheme, notes}) =
   let suffix
   if (builtinRest) {
     const {value, unit, between} = builtinRest
-    const rest = math.unit(value, unit).to('minutes').toString()
-    suffix = `Rest ${rest} between ${between}`
+    suffix = `Rest ${value} ${unit} between ${between}`
   }
 
   return (

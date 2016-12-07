@@ -8,10 +8,9 @@
     "react-scripts": "0.8.1"
   },
   "dependencies": {
-    "mathjs": "^3.8.0",
     "react": "15.3.x",
     "react-dom": "15.3.x",
-    "react-native": "^0.39.0",
+    "react-native": "^0.37.0",
     "react-native-web": "0.0.55"
   },
   "scripts": {

@@ -4,16 +4,15 @@
   "private": true,
   "proxy": "http://localhost:8800",
   "devDependencies": {
-    "flow-bin": "^0.33.0",
-    "react-scripts": "0.7.0"
+    "flow-bin": "^0.36.0",
+    "react-scripts": "0.8.1"
   },
   "dependencies": {
-    "flow-bin": "^0.35.0",
-    "mathjs": "^3.7.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-native": "^0.35.0",
-    "react-native-web": "0.0.46"
+    "mathjs": "^3.8.0",
+    "react": "15.3.x",
+    "react-dom": "15.3.x",
+    "react-native": "^0.39.0",
+    "react-native-web": "0.0.55"
   },
   "scripts": {
     "start": "react-scripts start",

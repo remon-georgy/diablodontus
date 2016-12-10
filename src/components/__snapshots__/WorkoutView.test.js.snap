@@ -1,0 +1,1175 @@
+exports[`test (WorkoutView) Output matches snapshots 1`] = `
+<div
+  className=" __style_df"
+  style={
+    Object {
+      "MozBoxSizing": "border-box",
+      "WebkitAlignItems": "stretch",
+      "WebkitBoxAlign": "stretch",
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxOrient": "vertical",
+      "WebkitFlexBasis": "auto",
+      "WebkitFlexDirection": "column",
+      "WebkitFlexShrink": 0,
+      "alignItems": "stretch",
+      "backgroundColor": "transparent",
+      "borderBottomLeftRadius": "3px",
+      "borderBottomRightRadius": "3px",
+      "borderBottomStyle": "solid",
+      "borderBottomWidth": "0px",
+      "borderLeftStyle": "solid",
+      "borderLeftWidth": "0px",
+      "borderRightStyle": "solid",
+      "borderRightWidth": "0px",
+      "borderTopLeftRadius": "3px",
+      "borderTopRightRadius": "3px",
+      "borderTopStyle": "solid",
+      "borderTopWidth": "0px",
+      "boxSizing": "border-box",
+      "color": "inherit",
+      "display": null,
+      "flexBasis": "auto",
+      "flexDirection": "column",
+      "flexShrink": 0,
+      "font": "inherit",
+      "listStyle": "none",
+      "marginBottom": "0px",
+      "marginLeft": "0px",
+      "marginRight": "0px",
+      "marginTop": "0px",
+      "minHeight": "0px",
+      "minWidth": "0px",
+      "msFlexAlign": "stretch",
+      "msFlexDirection": "column",
+      "msFlexNegative": 0,
+      "msPreferredSize": "auto",
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
+      "position": "relative",
+      "textAlign": "inherit",
+      "textDecoration": "none",
+    }
+  }>
+  <span
+    className=""
+    onClick={[Function]}
+    style={
+      Object {
+        "borderBottomWidth": "0px",
+        "borderLeftWidth": "0px",
+        "borderRightWidth": "0px",
+        "borderTopWidth": "0px",
+        "color": "inherit",
+        "display": "inline",
+        "font": "inherit",
+        "fontWeight": "bold",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "paddingBottom": "5px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "textDecoration": "none",
+        "wordWrap": "break-word",
+      }
+    }>
+    Open 14.2
+  </span>
+  <span
+    className=""
+    onClick={[Function]}
+    style={
+      Object {
+        "borderBottomWidth": "0px",
+        "borderLeftWidth": "0px",
+        "borderRightWidth": "0px",
+        "borderTopWidth": "0px",
+        "color": "inherit",
+        "display": "inline",
+        "font": "inherit",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "textDecoration": "none",
+        "wordWrap": "break-word",
+      }
+    }>
+    For 
+    cycles
+  </span>
+  <div
+    className=" __style_df"
+    style={
+      Object {
+        "MozBoxSizing": "border-box",
+        "WebkitAlignItems": "stretch",
+        "WebkitBoxAlign": "stretch",
+        "WebkitBoxDirection": "normal",
+        "WebkitBoxOrient": "vertical",
+        "WebkitFlexBasis": "auto",
+        "WebkitFlexDirection": "column",
+        "WebkitFlexShrink": 0,
+        "alignItems": "stretch",
+        "backgroundColor": "transparent",
+        "borderBottomStyle": "solid",
+        "borderBottomWidth": "0px",
+        "borderLeftStyle": "solid",
+        "borderLeftWidth": "0px",
+        "borderRightStyle": "solid",
+        "borderRightWidth": "0px",
+        "borderTopStyle": "solid",
+        "borderTopWidth": "0px",
+        "boxSizing": "border-box",
+        "color": "inherit",
+        "display": null,
+        "flexBasis": "auto",
+        "flexDirection": "column",
+        "flexShrink": 0,
+        "font": "inherit",
+        "listStyle": "none",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "minHeight": "0px",
+        "minWidth": "0px",
+        "msFlexAlign": "stretch",
+        "msFlexDirection": "column",
+        "msFlexNegative": 0,
+        "msPreferredSize": "auto",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "position": "relative",
+        "textAlign": "inherit",
+        "textDecoration": "none",
+      }
+    }>
+    <div
+      className=" __style_df"
+      style={
+        Object {
+          "MozBoxSizing": "border-box",
+          "WebkitAlignItems": "stretch",
+          "WebkitBoxAlign": "stretch",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "vertical",
+          "WebkitFlexBasis": "auto",
+          "WebkitFlexDirection": "column",
+          "WebkitFlexShrink": 0,
+          "alignItems": "stretch",
+          "backgroundColor": "transparent",
+          "borderBottomStyle": "solid",
+          "borderBottomWidth": "0px",
+          "borderLeftStyle": "solid",
+          "borderLeftWidth": "0px",
+          "borderRightStyle": "solid",
+          "borderRightWidth": "0px",
+          "borderTopStyle": "solid",
+          "borderTopWidth": "0px",
+          "boxSizing": "border-box",
+          "color": "inherit",
+          "display": null,
+          "flexBasis": "auto",
+          "flexDirection": "column",
+          "flexShrink": 0,
+          "font": "inherit",
+          "listStyle": "none",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "minHeight": "0px",
+          "minWidth": "0px",
+          "msFlexAlign": "stretch",
+          "msFlexDirection": "column",
+          "msFlexNegative": 0,
+          "msPreferredSize": "auto",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "textAlign": "inherit",
+          "textDecoration": "none",
+        }
+      }>
+      <span
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": "0px",
+            "borderLeftWidth": "0px",
+            "borderRightWidth": "0px",
+            "borderTopWidth": "0px",
+            "color": "inherit",
+            "display": "inline",
+            "font": "inherit",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "textDecoration": "none",
+            "wordWrap": "break-word",
+          }
+        }>
+         cycles of  3 minutes each (Score is total number of completed cycles, plus number of reps completed in first incomplete cycle.)
+      </span>
+      <span
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": "0px",
+            "borderLeftWidth": "0px",
+            "borderRightWidth": "0px",
+            "borderTopWidth": "0px",
+            "color": "inherit",
+            "display": "inline",
+            "font": "inherit",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "textDecoration": "none",
+            "wordWrap": "break-word",
+          }
+        }>
+        2
+         Rounds
+      </span>
+      <span
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": "0px",
+            "borderLeftWidth": "0px",
+            "borderRightWidth": "0px",
+            "borderTopWidth": "0px",
+            "color": "inherit",
+            "display": "inline",
+            "font": "inherit",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "textDecoration": "none",
+            "wordWrap": "break-word",
+          }
+        }>
+        10, 12, 14, 16, 18, 20, 22, 24, 26, 28...etc
+      </span>
+      <div
+        className=" __style_df"
+        style={
+          Object {
+            "MozBoxSizing": "border-box",
+            "WebkitAlignItems": "stretch",
+            "WebkitBoxAlign": "stretch",
+            "WebkitBoxDirection": "normal",
+            "WebkitBoxOrient": "vertical",
+            "WebkitFlexBasis": "auto",
+            "WebkitFlexDirection": "column",
+            "WebkitFlexShrink": 0,
+            "alignItems": "stretch",
+            "backgroundColor": "transparent",
+            "borderBottomStyle": "solid",
+            "borderBottomWidth": "0px",
+            "borderLeftStyle": "solid",
+            "borderLeftWidth": "0px",
+            "borderRightStyle": "solid",
+            "borderRightWidth": "0px",
+            "borderTopStyle": "solid",
+            "borderTopWidth": "0px",
+            "boxSizing": "border-box",
+            "color": "inherit",
+            "display": null,
+            "flexBasis": "auto",
+            "flexDirection": "column",
+            "flexShrink": 0,
+            "font": "inherit",
+            "listStyle": "none",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "minHeight": "0px",
+            "minWidth": "0px",
+            "msFlexAlign": "stretch",
+            "msFlexDirection": "column",
+            "msFlexNegative": 0,
+            "msPreferredSize": "auto",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "position": "relative",
+            "textAlign": "inherit",
+            "textDecoration": "none",
+          }
+        }>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          Overhead Squat 95/65 lbs
+        </span>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          Chest-to-Bar Pull-up
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`test (WorkoutView) Output matches snapshots 2`] = `
+<div
+  className=" __style_df"
+  style={
+    Object {
+      "MozBoxSizing": "border-box",
+      "WebkitAlignItems": "stretch",
+      "WebkitBoxAlign": "stretch",
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxOrient": "vertical",
+      "WebkitFlexBasis": "auto",
+      "WebkitFlexDirection": "column",
+      "WebkitFlexShrink": 0,
+      "alignItems": "stretch",
+      "backgroundColor": "transparent",
+      "borderBottomLeftRadius": "3px",
+      "borderBottomRightRadius": "3px",
+      "borderBottomStyle": "solid",
+      "borderBottomWidth": "0px",
+      "borderLeftStyle": "solid",
+      "borderLeftWidth": "0px",
+      "borderRightStyle": "solid",
+      "borderRightWidth": "0px",
+      "borderTopLeftRadius": "3px",
+      "borderTopRightRadius": "3px",
+      "borderTopStyle": "solid",
+      "borderTopWidth": "0px",
+      "boxSizing": "border-box",
+      "color": "inherit",
+      "display": null,
+      "flexBasis": "auto",
+      "flexDirection": "column",
+      "flexShrink": 0,
+      "font": "inherit",
+      "listStyle": "none",
+      "marginBottom": "0px",
+      "marginLeft": "0px",
+      "marginRight": "0px",
+      "marginTop": "0px",
+      "minHeight": "0px",
+      "minWidth": "0px",
+      "msFlexAlign": "stretch",
+      "msFlexDirection": "column",
+      "msFlexNegative": 0,
+      "msPreferredSize": "auto",
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
+      "position": "relative",
+      "textAlign": "inherit",
+      "textDecoration": "none",
+    }
+  }>
+  <span
+    className=""
+    onClick={[Function]}
+    style={
+      Object {
+        "borderBottomWidth": "0px",
+        "borderLeftWidth": "0px",
+        "borderRightWidth": "0px",
+        "borderTopWidth": "0px",
+        "color": "inherit",
+        "display": "inline",
+        "font": "inherit",
+        "fontWeight": "bold",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "paddingBottom": "5px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "textDecoration": "none",
+        "wordWrap": "break-word",
+      }
+    }>
+    Nicole
+  </span>
+  <span
+    className=""
+    onClick={[Function]}
+    style={
+      Object {
+        "borderBottomWidth": "0px",
+        "borderLeftWidth": "0px",
+        "borderRightWidth": "0px",
+        "borderTopWidth": "0px",
+        "color": "inherit",
+        "display": "inline",
+        "font": "inherit",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "textDecoration": "none",
+        "wordWrap": "break-word",
+      }
+    }>
+    For 
+    reps
+  </span>
+  <div
+    className=" __style_df"
+    style={
+      Object {
+        "MozBoxSizing": "border-box",
+        "WebkitAlignItems": "stretch",
+        "WebkitBoxAlign": "stretch",
+        "WebkitBoxDirection": "normal",
+        "WebkitBoxOrient": "vertical",
+        "WebkitFlexBasis": "auto",
+        "WebkitFlexDirection": "column",
+        "WebkitFlexShrink": 0,
+        "alignItems": "stretch",
+        "backgroundColor": "transparent",
+        "borderBottomStyle": "solid",
+        "borderBottomWidth": "0px",
+        "borderLeftStyle": "solid",
+        "borderLeftWidth": "0px",
+        "borderRightStyle": "solid",
+        "borderRightWidth": "0px",
+        "borderTopStyle": "solid",
+        "borderTopWidth": "0px",
+        "boxSizing": "border-box",
+        "color": "inherit",
+        "display": null,
+        "flexBasis": "auto",
+        "flexDirection": "column",
+        "flexShrink": 0,
+        "font": "inherit",
+        "listStyle": "none",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "minHeight": "0px",
+        "minWidth": "0px",
+        "msFlexAlign": "stretch",
+        "msFlexDirection": "column",
+        "msFlexNegative": 0,
+        "msPreferredSize": "auto",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "position": "relative",
+        "textAlign": "inherit",
+        "textDecoration": "none",
+      }
+    }>
+    <div
+      className=" __style_df"
+      style={
+        Object {
+          "MozBoxSizing": "border-box",
+          "WebkitAlignItems": "stretch",
+          "WebkitBoxAlign": "stretch",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "vertical",
+          "WebkitFlexBasis": "auto",
+          "WebkitFlexDirection": "column",
+          "WebkitFlexShrink": 0,
+          "alignItems": "stretch",
+          "backgroundColor": "transparent",
+          "borderBottomStyle": "solid",
+          "borderBottomWidth": "0px",
+          "borderLeftStyle": "solid",
+          "borderLeftWidth": "0px",
+          "borderRightStyle": "solid",
+          "borderRightWidth": "0px",
+          "borderTopStyle": "solid",
+          "borderTopWidth": "0px",
+          "boxSizing": "border-box",
+          "color": "inherit",
+          "display": null,
+          "flexBasis": "auto",
+          "flexDirection": "column",
+          "flexShrink": 0,
+          "font": "inherit",
+          "listStyle": "none",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "minHeight": "0px",
+          "minWidth": "0px",
+          "msFlexAlign": "stretch",
+          "msFlexDirection": "column",
+          "msFlexNegative": 0,
+          "msPreferredSize": "auto",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "textAlign": "inherit",
+          "textDecoration": "none",
+        }
+      }>
+      <span
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": "0px",
+            "borderLeftWidth": "0px",
+            "borderRightWidth": "0px",
+            "borderTopWidth": "0px",
+            "color": "inherit",
+            "display": "inline",
+            "font": "inherit",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "textDecoration": "none",
+            "wordWrap": "break-word",
+          }
+        }>
+        AMRAP 20 minutes
+      </span>
+      <div
+        className=" __style_df"
+        style={
+          Object {
+            "MozBoxSizing": "border-box",
+            "WebkitAlignItems": "stretch",
+            "WebkitBoxAlign": "stretch",
+            "WebkitBoxDirection": "normal",
+            "WebkitBoxOrient": "vertical",
+            "WebkitFlexBasis": "auto",
+            "WebkitFlexDirection": "column",
+            "WebkitFlexShrink": 0,
+            "alignItems": "stretch",
+            "backgroundColor": "transparent",
+            "borderBottomStyle": "solid",
+            "borderBottomWidth": "0px",
+            "borderLeftStyle": "solid",
+            "borderLeftWidth": "0px",
+            "borderRightStyle": "solid",
+            "borderRightWidth": "0px",
+            "borderTopStyle": "solid",
+            "borderTopWidth": "0px",
+            "boxSizing": "border-box",
+            "color": "inherit",
+            "display": null,
+            "flexBasis": "auto",
+            "flexDirection": "column",
+            "flexShrink": 0,
+            "font": "inherit",
+            "listStyle": "none",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "minHeight": "0px",
+            "minWidth": "0px",
+            "msFlexAlign": "stretch",
+            "msFlexDirection": "column",
+            "msFlexNegative": 0,
+            "msPreferredSize": "auto",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "position": "relative",
+            "textAlign": "inherit",
+            "textDecoration": "none",
+          }
+        }>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          Run 400 meters
+        </span>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          AMRAP Pull-Up
+        </span>
+      </div>
+    </div>
+  </div>
+  Score is total of un-broken Pull-Ups completed each round.
+</div>
+`;
+
+exports[`test (WorkoutView) Output matches snapshots 3`] = `
+<div
+  className=" __style_df"
+  style={
+    Object {
+      "MozBoxSizing": "border-box",
+      "WebkitAlignItems": "stretch",
+      "WebkitBoxAlign": "stretch",
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxOrient": "vertical",
+      "WebkitFlexBasis": "auto",
+      "WebkitFlexDirection": "column",
+      "WebkitFlexShrink": 0,
+      "alignItems": "stretch",
+      "backgroundColor": "transparent",
+      "borderBottomLeftRadius": "3px",
+      "borderBottomRightRadius": "3px",
+      "borderBottomStyle": "solid",
+      "borderBottomWidth": "0px",
+      "borderLeftStyle": "solid",
+      "borderLeftWidth": "0px",
+      "borderRightStyle": "solid",
+      "borderRightWidth": "0px",
+      "borderTopLeftRadius": "3px",
+      "borderTopRightRadius": "3px",
+      "borderTopStyle": "solid",
+      "borderTopWidth": "0px",
+      "boxSizing": "border-box",
+      "color": "inherit",
+      "display": null,
+      "flexBasis": "auto",
+      "flexDirection": "column",
+      "flexShrink": 0,
+      "font": "inherit",
+      "listStyle": "none",
+      "marginBottom": "0px",
+      "marginLeft": "0px",
+      "marginRight": "0px",
+      "marginTop": "0px",
+      "minHeight": "0px",
+      "minWidth": "0px",
+      "msFlexAlign": "stretch",
+      "msFlexDirection": "column",
+      "msFlexNegative": 0,
+      "msPreferredSize": "auto",
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
+      "position": "relative",
+      "textAlign": "inherit",
+      "textDecoration": "none",
+    }
+  }>
+  <span
+    className=""
+    onClick={[Function]}
+    style={
+      Object {
+        "borderBottomWidth": "0px",
+        "borderLeftWidth": "0px",
+        "borderRightWidth": "0px",
+        "borderTopWidth": "0px",
+        "color": "inherit",
+        "display": "inline",
+        "font": "inherit",
+        "fontWeight": "bold",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "paddingBottom": "5px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "textDecoration": "none",
+        "wordWrap": "break-word",
+      }
+    }>
+    Santora
+  </span>
+  <span
+    className=""
+    onClick={[Function]}
+    style={
+      Object {
+        "borderBottomWidth": "0px",
+        "borderLeftWidth": "0px",
+        "borderRightWidth": "0px",
+        "borderTopWidth": "0px",
+        "color": "inherit",
+        "display": "inline",
+        "font": "inherit",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "textDecoration": "none",
+        "wordWrap": "break-word",
+      }
+    }>
+    For 
+    reps
+  </span>
+  <div
+    className=" __style_df"
+    style={
+      Object {
+        "MozBoxSizing": "border-box",
+        "WebkitAlignItems": "stretch",
+        "WebkitBoxAlign": "stretch",
+        "WebkitBoxDirection": "normal",
+        "WebkitBoxOrient": "vertical",
+        "WebkitFlexBasis": "auto",
+        "WebkitFlexDirection": "column",
+        "WebkitFlexShrink": 0,
+        "alignItems": "stretch",
+        "backgroundColor": "transparent",
+        "borderBottomStyle": "solid",
+        "borderBottomWidth": "0px",
+        "borderLeftStyle": "solid",
+        "borderLeftWidth": "0px",
+        "borderRightStyle": "solid",
+        "borderRightWidth": "0px",
+        "borderTopStyle": "solid",
+        "borderTopWidth": "0px",
+        "boxSizing": "border-box",
+        "color": "inherit",
+        "display": null,
+        "flexBasis": "auto",
+        "flexDirection": "column",
+        "flexShrink": 0,
+        "font": "inherit",
+        "listStyle": "none",
+        "marginBottom": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "marginTop": "0px",
+        "minHeight": "0px",
+        "minWidth": "0px",
+        "msFlexAlign": "stretch",
+        "msFlexDirection": "column",
+        "msFlexNegative": 0,
+        "msPreferredSize": "auto",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "paddingTop": "0px",
+        "position": "relative",
+        "textAlign": "inherit",
+        "textDecoration": "none",
+      }
+    }>
+    <div
+      className=" __style_df"
+      style={
+        Object {
+          "MozBoxSizing": "border-box",
+          "WebkitAlignItems": "stretch",
+          "WebkitBoxAlign": "stretch",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "vertical",
+          "WebkitFlexBasis": "auto",
+          "WebkitFlexDirection": "column",
+          "WebkitFlexShrink": 0,
+          "alignItems": "stretch",
+          "backgroundColor": "transparent",
+          "borderBottomStyle": "solid",
+          "borderBottomWidth": "0px",
+          "borderLeftStyle": "solid",
+          "borderLeftWidth": "0px",
+          "borderRightStyle": "solid",
+          "borderRightWidth": "0px",
+          "borderTopStyle": "solid",
+          "borderTopWidth": "0px",
+          "boxSizing": "border-box",
+          "color": "inherit",
+          "display": null,
+          "flexBasis": "auto",
+          "flexDirection": "column",
+          "flexShrink": 0,
+          "font": "inherit",
+          "listStyle": "none",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "minHeight": "0px",
+          "minWidth": "0px",
+          "msFlexAlign": "stretch",
+          "msFlexDirection": "column",
+          "msFlexNegative": 0,
+          "msPreferredSize": "auto",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "textAlign": "inherit",
+          "textDecoration": "none",
+        }
+      }>
+      <span
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": "0px",
+            "borderLeftWidth": "0px",
+            "borderRightWidth": "0px",
+            "borderTopWidth": "0px",
+            "color": "inherit",
+            "display": "inline",
+            "font": "inherit",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "textDecoration": "none",
+            "wordWrap": "break-word",
+          }
+        }>
+        3
+         Rounds
+      </span>
+      <div
+        className=" __style_df"
+        style={
+          Object {
+            "MozBoxSizing": "border-box",
+            "WebkitAlignItems": "stretch",
+            "WebkitBoxAlign": "stretch",
+            "WebkitBoxDirection": "normal",
+            "WebkitBoxOrient": "vertical",
+            "WebkitFlexBasis": "auto",
+            "WebkitFlexDirection": "column",
+            "WebkitFlexShrink": 0,
+            "alignItems": "stretch",
+            "backgroundColor": "transparent",
+            "borderBottomStyle": "solid",
+            "borderBottomWidth": "0px",
+            "borderLeftStyle": "solid",
+            "borderLeftWidth": "0px",
+            "borderRightStyle": "solid",
+            "borderRightWidth": "0px",
+            "borderTopStyle": "solid",
+            "borderTopWidth": "0px",
+            "boxSizing": "border-box",
+            "color": "inherit",
+            "display": null,
+            "flexBasis": "auto",
+            "flexDirection": "column",
+            "flexShrink": 0,
+            "font": "inherit",
+            "listStyle": "none",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "minHeight": "0px",
+            "minWidth": "0px",
+            "msFlexAlign": "stretch",
+            "msFlexDirection": "column",
+            "msFlexNegative": 0,
+            "msPreferredSize": "auto",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "position": "relative",
+            "textAlign": "inherit",
+            "textDecoration": "none",
+          }
+        }>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          1 minute  Clean 155 lbs
+        </span>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          1 minute  Shuttle Sprint (20 ft foward, 20 ft backwards = 1 rep)
+        </span>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          1 minute  Deadlift 245 lbs
+        </span>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          1 minute  Burpee
+        </span>
+        <span
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": "0px",
+              "borderLeftWidth": "0px",
+              "borderRightWidth": "0px",
+              "borderTopWidth": "0px",
+              "color": "inherit",
+              "display": "inline",
+              "font": "inherit",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px",
+              "marginTop": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "textDecoration": "none",
+              "wordWrap": "break-word",
+            }
+          }>
+          1 minute  Jerk 155 lbs
+        </span>
+      </div>
+      <span
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": "0px",
+            "borderLeftWidth": "0px",
+            "borderRightWidth": "0px",
+            "borderTopWidth": "0px",
+            "color": "inherit",
+            "display": "inline",
+            "font": "inherit",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "marginTop": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "textDecoration": "none",
+            "wordWrap": "break-word",
+          }
+        }>
+        Rest 1 min between rounds
+      </span>
+    </div>
+  </div>
+</div>
+`;

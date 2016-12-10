@@ -8,10 +8,10 @@
     "react-scripts": "0.8.3"
   },
   "dependencies": {
-    "react": "15.3.x",
-    "react-dom": "15.3.x",
-    "react-native": "0.37.x",
-    "react-native-web": "0.0.55"
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-native": "^0.39.1",
+    "react-native-web": "github:moox/react-native-web#compat-15.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -14,7 +14,6 @@ export default class WorkoutsListView extends Component {
   render() {
     const { workouts } = this.props
     const rows = workouts.map((workout, i) => {
-      //const { name, scoring, clusters} = workout
       return <WorkoutView {...workout} key={i}/>
     });
 

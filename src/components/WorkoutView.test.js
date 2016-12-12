@@ -49,7 +49,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Pull-Up Rig"
               ],
-              "id": "/movement/chest-to-bar",
+              "id": "chest-to-bar",
               "name": "Chest-to-Bar Pull-up"
             },
             "movementID": "/movement/chest-to-bar",
@@ -93,7 +93,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Body-weight"
               ],
-              "id": "/movement/run",
+              "id": "run",
               "name": "Run"
             },
             "movementID": "/movement/run",
@@ -111,7 +111,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Pull-Up Rig"
               ],
-              "id": "/movement/pull-up",
+              "id": "pull-up",
               "name": "Pull-Up"
             },
             "movementID": "/movement/pull-up",
@@ -168,7 +168,7 @@ it('(WorkoutView) Output matches snapshots', () => {
                 "Medicine Ball",
                 "Plates"
               ],
-              "id": "/movement/clean",
+              "id": "clean",
               "name": "Clean"
             },
             "movementID": "/movement/clean",
@@ -188,7 +188,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Body-weight"
               ],
-              "id": "/movement/shuttle-sprint",
+              "id": "shuttle-sprint",
               "name": "Shuttle Sprint"
             },
             "movementID": "/movement/shuttle-sprint",
@@ -208,7 +208,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Barbell"
               ],
-              "id": "/movement/deadlift",
+              "id": "deadlift",
               "name": "Deadlift"
             },
             "movementID": "/movement/deadlift",
@@ -226,7 +226,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Body-weight"
               ],
-              "id": "/movement/burpee",
+              "id": "burpee",
               "name": "Burpee"
             },
             "movementID": "/movement/burpee",
@@ -243,7 +243,7 @@ it('(WorkoutView) Output matches snapshots', () => {
               "equipment": [
                 "Barbell"
               ],
-              "id": "/movement/jerk",
+              "id": "jerk",
               "name": "Jerk"
             },
             "movementID": "/movement/jerk",
@@ -282,7 +282,6 @@ it('(WorkoutView) Output matches snapshots', () => {
 ]
 
   for (let workout of workouts) {
-    console.log(workout)
     const component = renderer.create(<WorkoutView {...workout} />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

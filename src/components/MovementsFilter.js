@@ -1,37 +1,71 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
+  StyleSheet,
   View,
   Switch,
   Text
 } from 'react-native';
 
-const FilterItem = ({label, value = true}) => {
-  return (
-    <View>
-      <Text>{label}</Text>
-      <Switch value={value}/>
-    </View>
-  )
-}
-FilterItem.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.bool,
+const styles = StyleSheet.create({
+   movementsFilter: {
+     flexDirection: 'row',
+     flexWrap: 'wrap',
+     
+   }
+})
+
+class FilterItem extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    value: PropTypes.bool.isRequired,
+    onFilterChecked: PropTypes.func.isRequired
+  }
+  
+  constructor(props) {
+    super(props);
+    this.onValueChanged = this.onValueChanged.bind(this)
+  }
+
+  onValueChanged(value) {
+    const {id, onFilterChecked} = this.props;
+    onFilterChecked(id, value);
+  }
+  
+  render() {
+    const {name, value} = this.props;
+    return (
+      <View>
+        <Text>{name}</Text>
+        <Switch
+          value={value}
+          onValueChange={this.onValueChanged}
+        />
+      </View>
+    )
+  }
 }
 
-const MovementsFilter = ({movements}) => {
-  console.log(movements)
+const MovementsFilter = ({onFilterChecked, movements}) => {
   const filterItems = movements.map((movement, i) => {
-    return <FilterItem key={i} label={movement}/>
+    return <FilterItem
+      key={i}
+      onFilterChecked={onFilterChecked}
+      {...movement} />
   })
   
   return (
-    <View>
-      {/* {filterItems} */}
+    <View style={styles.movementsFilter}>
+      {filterItems}
     </View>
   )
 }
 MovementsFilter.propTypes = {
-  movements: PropTypes.arrayOf(PropTypes.string).isRequired
+  onFilterChecked: PropTypes.func.isRequired,
+  movements: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.bool.isRequired,
+  })).isRequired
 }
 
 export default MovementsFilter;

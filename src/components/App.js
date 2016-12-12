@@ -11,17 +11,21 @@ import MovementsFilter from './MovementsFilter'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
     backgroundColor: '#F5FCFF',
-    width: '100%'
+  },
+  drawer: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  results: {
+    flexDirection: 'column',
+    flex: 2,
+    alignItems: 'flex-start',
   },
   textInput: {
-    flex: 1,
     borderBottomWidth: 2,
-    width: 250,
-    height: 50,
     fontSize: 30
   }
 });
@@ -55,9 +59,17 @@ function syncData() {
  * FILTERS
  ****************************************************/
 function workoutsNameFilter(inputName) {
-  console.log('workoutsNameFilter', inputName)
   return function({name}) {
     return name.toLowerCase().includes(inputName.toLowerCase());
+  }
+}
+
+function workoutsMovementsFilter(selectedMovements) {
+  return function({movements}) {
+    const intersection = movements.filter((id) => {
+      return selectedMovements.indexOf(id) !== -1
+    })
+    return intersection.length === movements.length;
   }
 }
 
@@ -74,6 +86,7 @@ export default class WodMeUp extends Component {
     }
 
     this.onChangeText = this.onChangeText.bind(this)
+    this._onFilterChecked = this._onFilterChecked.bind(this)
   }
 
   onChangeText(value) {
@@ -84,34 +97,63 @@ export default class WodMeUp extends Component {
     const p = syncData();
 
     p.then((data) => {
-      this.setState(data);
+      let { workouts, movements } = data;
+      movements = data.movements.map((movement) => {
+        return {
+          ...movement,
+          value: true,
+        }
+      });
+      this.setState({
+        workouts: workouts,
+        movements: movements
+      });
     });
   }
 
+  _onFilterChecked(id, value) {
+    const movementsNext = this.state.movements.map((movement) => {
+      if (movement.id === id) {
+        movement.value = value
+      }
+      return movement
+    })
+    this.setState({movements: movementsNext});
+  }
+
   getFilteredWorkouts() {
+    let selectedMovements = this.state.movements
+    .filter(({value}) => {
+      return value;
+    })
+    .map(({id}) => {
+      return id
+    });
+    
+    let workoutsNext = this.state.workouts;
     if (this.state.nameFilter !== '') {
-      console.log('Filtering by', this.state.nameFilter)
-        return this.state.workouts
-      .filter(workoutsNameFilter(this.state.nameFilter));
+      workoutsNext = this.state.workouts.filter(workoutsNameFilter(this.state.nameFilter));
     }
-    return this.state.workouts
+    workoutsNext = workoutsNext.filter(workoutsMovementsFilter(selectedMovements))
+    return workoutsNext;
   }
 
   render() {
     const filteredWorkouts = this.getFilteredWorkouts()
     const movements = this.state.movements;
-    console.log(this.state)
     return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.drawer}>
           <TextInput style={styles.textInput}
             value={this.state.nameFilter}
             onChangeText={this.onChangeText}
           />
+          <MovementsFilter
+            movements={movements}
+            onFilterChecked={this._onFilterChecked}
+          />
         </View>
-        <MovementsFilter movements={movements}/>
-        <WorkoutsListView workouts={filteredWorkouts}/>
-
+        <WorkoutsListView workouts={filteredWorkouts} style={styles.results}/>
       </View>
     );
   }

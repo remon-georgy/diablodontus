@@ -5,7 +5,7 @@
   "proxy": "http://localhost:8800",
   "devDependencies": {
     "flow-bin": "^0.36.0",
-    "react-scripts": "0.8.3",
+    "react-scripts": "0.8.4",
     "react-test-renderer": "15.4.x"
   },
   "dependencies": {

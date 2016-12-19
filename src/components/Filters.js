@@ -8,7 +8,7 @@ import {
 
 const styles = StyleSheet.create({
    movementsFilter: {
-     flexDirection: 'row',
+     flexDirection: 'column',
      flexWrap: 'wrap',
      
    }
@@ -45,7 +45,7 @@ class FilterItem extends Component {
   }
 }
 
-const MovementsFilter = ({onFilterChecked, movements}) => {
+export const MovementsFilter = ({onFilterChecked, movements}) => {
   const filterItems = movements.map((movement, i) => {
     return <FilterItem
       key={i}
@@ -68,4 +68,25 @@ MovementsFilter.propTypes = {
   })).isRequired
 }
 
-export default MovementsFilter;
+export const EquipmentsFilter = ({onFilterChecked, equipments}) => {
+  const filterItems = equipments.map((equipment, i) => {
+    return <FilterItem
+      key={i}
+      onFilterChecked={onFilterChecked}
+      {...equipment} />
+  })
+  
+  return (
+    <View style={styles.movementsFilter}>
+      {filterItems}
+    </View>
+  )
+}
+EquipmentsFilter.propTypes = {
+  onFilterChecked: PropTypes.func.isRequired,
+  equipments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.bool.isRequired,
+  })).isRequired
+}

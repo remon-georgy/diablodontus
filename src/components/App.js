@@ -5,8 +5,7 @@ import {
   TextInput,
 } from 'react-native';
 import WorkoutsListView from './WorkoutsListView';
-import { MovementsFilter, EquipmentsFilter } from './Filters'
-
+import Filter from './Filter';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,17 +38,6 @@ const styles = StyleSheet.create({
 /*****************************************************
  * UTILITIES
  ****************************************************/
-function getWorkouts() {
-  return fetch('/workouts')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      return responseJson;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function syncData() {
   return fetch('/sync')
     .then((response) => response.json())
@@ -88,6 +76,14 @@ function workoutsEquipmentsFilter(selectedEquipments) {
   }
 }
 
+function workoutsTagsFilter(selectedTags) {
+  return function({tags}) {
+    const intersection = tags.filter((id) => {
+      return selectedTags.indexOf(id) !== -1
+    })
+    return intersection.length === tags.length;
+  }
+}
 /*****************************************************
  * APP
  ****************************************************/
@@ -102,12 +98,13 @@ export default class WodMeUp extends Component {
       nameFilter: '',
     }
 
-    this.onChangeText = this.onChangeText.bind(this)
+    this._onChangeText = this._onChangeText.bind(this)
     this._onMovementFilterChecked = this._onMovementFilterChecked.bind(this)
     this._onEquipmentFilterChecked = this._onEquipmentFilterChecked.bind(this)
+    this._onFilterChanged = this._onFilterChanged.bind(this)
   }
 
-  onChangeText(value) {
+  _onChangeText(value) {
     this.setState({nameFilter: value});
   }
 
@@ -125,6 +122,12 @@ export default class WodMeUp extends Component {
       equipments = data.equipments.map((equipment) => {
         return {
           ...equipment,
+          value: true,
+        }
+      });
+      tags = data.tags.map((tag) => {
+        return {
+          ...tag,
           value: true,
         }
       });
@@ -157,6 +160,16 @@ export default class WodMeUp extends Component {
     })
     this.setState({equipments: equipmentNext});
   }
+  
+  _onFilterChanged(id, value, field, options) {
+    const optionsNext = this.state[field].map((option) => {
+      if (option.id === id) {
+        option.value = value
+      }
+      return option
+    })
+    this.setState({options: optionsNext});
+  }
 
   getFilteredWorkouts() {
 
@@ -176,38 +189,54 @@ export default class WodMeUp extends Component {
       return id
     });
     
+    let selectedTags = this.state.tags
+    .filter(({value}) => {
+      return value;
+    })
+    .map(({id}) => {
+      return id
+    });
+    
     let workoutsNext = this.state.workouts;
     if (this.state.nameFilter !== '') {
       workoutsNext = this.state.workouts.filter(workoutsNameFilter(this.state.nameFilter));
     }
     workoutsNext = workoutsNext.filter(workoutsMovementsFilter(selectedMovements))
-    console.log(workoutsNext)
     workoutsNext = workoutsNext.filter(workoutsEquipmentsFilter(selectedEquipments))
-    console.log(workoutsNext)
+    workoutsNext = workoutsNext.filter(workoutsTagsFilter(selectedTags))
     return workoutsNext;
     
   }
 
   render() {
     const filteredWorkouts = this.getFilteredWorkouts()
-    const { movements, equipments } = this.state;
+    const { movements, equipments, tags } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.drawer}>
           <TextInput style={styles.drawerTextInput}
             value={this.state.nameFilter}
-            onChangeText={this.onChangeText}
+            onChangeText={this._onChangeText}
           />
+
           <View style={styles.drawerFiltersContainer}>
-            <MovementsFilter
+            <Filter
+              field='movements'
+              options={movements}
               style={styles.drawerFilter}
-              movements={movements}
-              onFilterChecked={this._onMovementFilterChecked}
+              onFilterChanged={this._onFilterChanged}
             />
-            <EquipmentsFilter
+            <Filter
+              field='equipments'
+              options={equipments}
               style={styles.drawerFilter}
-              equipments={equipments}
-              onFilterChecked={this._onEquipmentFilterChecked}
+              onFilterChanged={this._onFilterChanged}
+            />
+            <Filter
+              field='tags'
+              options={tags}
+              style={styles.drawerFilter}
+              onFilterChanged={this._onFilterChanged}
             />
           </View>
         </View>

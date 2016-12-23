@@ -42,6 +42,10 @@ class Filter extends Component {
   constructor(props, state) {
     super(props, state);
     this._onValueChaned = this._onValueChaned.bind(this)
+    this._onAllValueChanged = this._onAllValueChanged.bind(this)
+    this.state = {
+      all: true
+    }
   }
   
   _onValueChaned(id, value) {
@@ -49,18 +53,33 @@ class Filter extends Component {
     this.props.onFilterChanged(id, value, field, options)
   }
   
+  _onAllValueChanged(id, value) {
+    const {field, options} = this.props;
+    this.setState({all: value})
+    this.props.onFilterAllChanged(value, field, options)
+  }
+  
   render() {
     const { options } = this.props
     const filterItems = options.map((option, i) => {
       return <FilterItem
         key={i}
+        {...option}
         onFilterChecked={this._onValueChaned}
-        {...option} />
+             />
     })
     
     return (
       <View>
-        {filterItems}
+        <FilterItem
+          id='all'
+          name='Check All'
+          value={this.state.all}
+          onFilterChecked={this._onAllValueChanged}
+        />
+        <View>
+          {filterItems}
+        </View>
       </View>
     )
   }
@@ -68,6 +87,7 @@ class Filter extends Component {
   static propTypes = {
     field: PropTypes.string.isRequired,
     onFilterChanged: PropTypes.func.isRequired,
+    onFilterAllChanged: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

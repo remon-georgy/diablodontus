@@ -89,6 +89,7 @@ export default class WodMeUp extends Component {
 
     this._onChangeText = this._onChangeText.bind(this)
     this._onFilterChanged = this._onFilterChanged.bind(this)
+    this._onFilterAllChanged = this._onFilterAllChanged.bind(this)
   }
 
   _onChangeText(value) {
@@ -101,14 +102,14 @@ export default class WodMeUp extends Component {
     p.then((data) => {
       let { workouts, filters } = data;
       
-      let options = {}      
+      let filterOptions = {}
       Object.keys(data.filters).forEach((key) => {
-        options[key] = filters[key].map((option) => { return {...option, value:true}})
+        filterOptions[key] = filters[key].map((option) => { return {...option, value:true}})
       })
       
       this.setState(deepmerge(this.state, {
         workouts: workouts,
-        filters: options
+        filters: filterOptions
       }));
       
     });
@@ -121,7 +122,23 @@ export default class WodMeUp extends Component {
       }
       return option
     })
-    this.setState({options: optionsNext});
+    this.setState(deepmerge(this.state, {
+      filters: {
+        [field]: optionsNext
+      }
+    }));
+  }
+
+  _onFilterAllChanged(value, field, options) {
+    const optionsNext = this.state.filters[field].map((option) => {
+      option.value = value
+      return option
+    })
+    this.setState(deepmerge(this.state, {
+      filters: {
+        [field]: optionsNext
+      }
+    }));
   }
 
   getFilteredWorkouts() {
@@ -158,6 +175,7 @@ export default class WodMeUp extends Component {
                 options={filters[key]}
                 style={styles.drawerFilter}
                 onFilterChanged={this._onFilterChanged}
+                onFilterAllChanged={this._onFilterAllChanged}
               />
             )}
           </View>

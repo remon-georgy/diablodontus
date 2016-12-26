@@ -5,14 +5,16 @@
   "devDependencies": {
     "flow-bin": "^0.36.0",
     "react-scripts": "0.8.4",
-    "react-test-renderer": "15.4.x"
+    "react-test-renderer": "^15.3.2"
   },
   "dependencies": {
+    "carbon-ui": "github:tuckerconnelly/carbon-ui",
     "deepmerge": "^1.3.1",
-    "react": "15.4.x",
-    "react-dom": "15.4.x",
-    "react-native": "^0.39.2",
-    "react-native-web": "github:moox/react-native-web#compat-15.4.0"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-native": "^0.37.0",
+    "react-native-universal": "0.0.2",
+    "react-native-web": "github:tuckerconnelly/react-native-web"
   },
   "scripts": {
     "start": "react-scripts start",

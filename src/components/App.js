@@ -7,7 +7,6 @@ import {
 import WorkoutsListView from './WorkoutsListView';
 import Filter from './Filter';
 import deepmerge from 'deepmerge';
-import { WebStyles } from 'carbon-ui'
 
 const styles = StyleSheet.create({
   container: {
@@ -182,7 +181,6 @@ export default class WodMeUp extends Component {
           </View>
         </View>
         <WorkoutsListView workouts={filteredWorkouts} style={styles.results}/>
-        <WebStyles />
       </View>
     );
   }

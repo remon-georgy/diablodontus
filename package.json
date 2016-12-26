@@ -3,27 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
     "flow-bin": "^0.36.0",
+    "jest": "18.0.0",
+    "jest-react-native": "18.0.0",
     "react-scripts": "0.8.4",
-    "react-test-renderer": "^15.3.2"
+    "react-test-renderer": "15.3.2"
   },
   "dependencies": {
     "carbon-ui": "github:tuckerconnelly/carbon-ui",
     "deepmerge": "^1.3.1",
-    "react": "^15.3.2",
+    "react": "15.3.2",
     "react-dom": "^15.3.2",
     "react-native": "^0.37.0",
-    "react-native-universal": "0.0.2",
     "react-native-web": "github:tuckerconnelly/react-native-web"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject",
     "react-native--start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "preset": "jest-react-native"
   }
 }

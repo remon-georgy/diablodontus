@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   drawer: {
     flexDirection: 'column',
-    flexGrow: 0
+    flexGrow: 0,
   },
   results: {
     flexDirection: 'column',
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
  * UTILITIES
  ****************************************************/
 function syncData() {
-  return fetch('/sync')
+  // FIXME get url from config
+  return fetch('http://192.168.1.108:8800/sync')
     .then((response) => response.json())
     .then((responseJson) => {
       return responseJson;
@@ -111,7 +112,6 @@ export default class WodMeUp extends Component {
         workouts: workouts,
         filters: filterOptions
       }));
-      
     });
   }
 

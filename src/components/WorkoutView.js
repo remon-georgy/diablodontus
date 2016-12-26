@@ -91,7 +91,11 @@ const FixedCyclesTiming = ({alias, deathBy, time, cycles}) => {
     parts.push('(Score is total number of completed cycles, plus number of reps completed in first incomplete cycle.)')
   }
 
-  return <Text>{parts.join(' ')}</Text>
+  return (
+    <Text>
+      {parts.join(' ')}
+    </Text>
+  )
 }
 FixedCyclesTiming.propTypes = {
   alias: PropTypes.string,
@@ -112,7 +116,11 @@ const CappedTiming = ({alias, time}) => {
     parts = parts.concat(['In', time / 60, 'minutes'])
   }
   
-  return <Text>{parts.join(' ')}</Text>
+  return (
+     <Text>
+       {parts.join(' ')}
+     </Text>
+   )
 }
 CappedTiming.propTypes = {
   alias: PropTypes.string,
@@ -236,7 +244,9 @@ const WorkoutView = ({ name, scoring, clusters, notes}) => {
       <Text style={styles.name}>{name}</Text>
       <Scoring scoring={scoring} />
       <View>{rendClusters}</View>
-      {notes && notes.join('\n')}
+      {notes &&
+        <Text>{notes.join('\n')}</Text>
+      }
     </View>
   );
 }

@@ -2,55 +2,42 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  TextInput,
 } from 'react-native';
+import {
+  IconToggle,
+  Dialog,
+  TextField
+} from 'carbon-ui'
+import AppBar from './Alt/AppBar'
 import WorkoutsListView from './WorkoutsListView';
 import Filter from './Filter';
 import deepmerge from 'deepmerge';
+import { applyFilter } from '../utils/filter';
+import { syncData } from '../utils/data';
+
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    backgroundColor: '#F5FCFF',
-  },
-  drawer: {
+    flex: 1,
     flexDirection: 'column',
-    flexGrow: 0,
   },
-  results: {
-    flexDirection: 'column',
-    flexGrow: 1,
-    flexBasis: 200,
+  appBar: {
+    flexShrink: 0,
+    flexGrow: 0
   },
   drawerFilter: {
     flexGrow: 0,
+    flexShrink: 0,
   },
   drawerFiltersContainer: {
     flexDirection: 'row',
     flexGrow: 0,
   },
-  drawerTextInput: {
-    flexGrow: 0,
-    borderBottomWidth: 2,
-    fontSize: 30
-  }
 });
 
 /*****************************************************
  * UTILITIES
  ****************************************************/
-function syncData() {
-  // FIXME get url from config
-  return fetch('http://192.168.1.108:8800/sync')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      return responseJson;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function selectedOptions(options) {
   return options.filter(({value}) => value).map(({id}) => id)
 }
@@ -64,22 +51,17 @@ function workoutsNameFilter(inputName) {
   }
 }
 
-function applyFilter(filterKey, selectedOptions) {
-  return function(workout) {
-    const intersection = workout[filterKey].filter((id) => {
-      return selectedOptions.indexOf(id) !== -1
-    })
-    return intersection.length === workout[filterKey].length;
-  }
-}
+
 /*****************************************************
  * APP
+ TODO refactor into Container ( Functional )
  ****************************************************/
 export default class WodMeUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
       nameFilter: '',
+      filtersDialogOpen: false,
       workouts: [],
       filters: {
         movements: [],
@@ -91,6 +73,7 @@ export default class WodMeUp extends Component {
     this._onChangeText = this._onChangeText.bind(this)
     this._onFilterChanged = this._onFilterChanged.bind(this)
     this._onFilterAllChanged = this._onFilterAllChanged.bind(this)
+    this._toggleFiltersDialog = this._toggleFiltersDialog.bind(this)
   }
 
   _onChangeText(value) {
@@ -140,6 +123,10 @@ export default class WodMeUp extends Component {
       }
     }));
   }
+  
+  _toggleFiltersDialog() {
+    this.setState({filtersDialogOpen: !this.state.filtersDialogOpen})
+  }
 
   getFilteredWorkouts() {
     const {filters} = this.state
@@ -161,27 +148,47 @@ export default class WodMeUp extends Component {
     const filteredWorkouts = this.getFilteredWorkouts()
     const { nameFilter, filters } = this.state;
     return (
-      <View style={styles.container}>
-        <View style={styles.drawer}>
-          <TextInput style={styles.drawerTextInput}
-            value={nameFilter}
-            onChangeText={this._onChangeText}
-          />
-          <View style={styles.drawerFiltersContainer}>
-            {Object.keys(filters).map((key) =>
-              <Filter
-                key={key}
-                field={key}
-                options={filters[key]}
-                style={styles.drawerFilter}
-                onFilterChanged={this._onFilterChanged}
-                onFilterAllChanged={this._onFilterAllChanged}
+        <View style={styles.container}>
+          {/* App bar */}
+          <AppBar
+            // style={styles.appBar}
+            title="Workouts"
+            children={[
+              <TextField
+                key='text-field'
+                singleLine
+                value={nameFilter}
+                onChangeText={this._onChangeText}
+              />,
+              <IconToggle name="filter_list"
+                key='icon-toggle'
+                onPress={this._toggleFiltersDialog}
               />
-            )}
-          </View>
+            ]}
+          />
+
+          {/* Results */}
+          <WorkoutsListView workouts={filteredWorkouts}/>
+
+          {/* Filters dialog */}
+          <Dialog
+            onOverlayPress={this._toggleFiltersDialog}
+            active={this.state.filtersDialogOpen}>
+            <View style={styles.drawerFiltersContainer}>
+              {Object.keys(filters).map((key) =>
+                <Filter
+                  key={key}
+                  field={key}
+                  options={filters[key]}
+                  style={styles.drawerFilter}
+                  onFilterChanged={this._onFilterChanged}
+                  onFilterAllChanged={this._onFilterAllChanged}
+                />
+              )}
+            </View>
+          </Dialog>
         </View>
-        <WorkoutsListView workouts={filteredWorkouts} style={styles.results}/>
-      </View>
+       
     );
   }
 }

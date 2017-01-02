@@ -3,19 +3,8 @@
  */
 
 import React, { PropTypes } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import {isEmpty, reduce} from 'lodash';
-
-const styles = StyleSheet.create({
-  name: {
-    fontWeight: 'bold',
-    paddingBottom: 5
-  },
-  Workout: {
-    padding: 20,
-    borderRadius: 3,
-  },
-});
 
 // TODO refactor
 export const Unit = ({rx, notes, movement}) => {
@@ -108,13 +97,7 @@ FixedCyclesTiming.propTypes = {
  * Workout -> Cluster -> Timing -> CappedTiming
  ***************************************************/
 const CappedTiming = ({alias, time}) => {
-  let parts = []
-  if (alias) {
-    parts.push(alias)
-  }
-  else {
-    parts = parts.concat(['In', time / 60, 'minutes'])
-  }
+  let parts = alias ? [alias] : ['In', time / 60, 'minutes']
   
   return (
      <Text>
@@ -133,6 +116,11 @@ CappedTiming.propTypes = {
 const Timing = ({type, ...rest}) => {
   let output
   switch (type) {
+    //////////////////
+    // TODO IF THER'S AN ALIAS, DISPLAY IT THEN RETURN EARLY
+    // TODO don't check for alias in timing Components
+    ////////////////////
+    
     // EMOM, Tabata, Fixed cycles in general
     case 'FixedCycles':
       output = <FixedCyclesTiming {...rest} />
@@ -240,8 +228,8 @@ const WorkoutView = ({ name, scoring, clusters, notes}) => {
   });
   
   return (
-    <View style={styles.Workout}>
-      <Text style={styles.name}>{name}</Text>
+    <View>
+      <Text>{name}</Text>
       <Scoring scoring={scoring} />
       <View>{rendClusters}</View>
       {notes &&

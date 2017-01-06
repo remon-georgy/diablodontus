@@ -19,7 +19,6 @@ const WorkoutsListView = ({ workouts }) => {
 
   return (
     <ScrollView
-      onScroll={() => {console.log('scroll')}}
       style={styles.container}
       children={rows}
     />

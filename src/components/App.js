@@ -15,6 +15,8 @@ import deepmerge from 'deepmerge';
 import { applyFilter } from '../utils/filter';
 import { syncData } from '../utils/data';
 
+import PouchDB from 'pouchdb-react-native'
+import pouchdbFind from 'pouchdb-find';
 
 const styles = StyleSheet.create({
   container: {
@@ -80,22 +82,50 @@ export default class WodMeUp extends Component {
     this.setState(deepmerge(this.state, {nameFilter: value}));
   }
 
+  /**
+   * TODO Move database connection code somwhere else.
+   */
   componentWillMount() {
-    const p = syncData();
+    PouchDB.plugin(pouchdbFind)
 
-    p.then((data) => {
-      let { workouts, filters } = data;
-      
-      let filterOptions = {}
-      Object.keys(data.filters).forEach((key) => {
-        filterOptions[key] = filters[key].map((option) => { return {...option, value:true}})
-      })
-      
-      this.setState(deepmerge(this.state, {
-        workouts: workouts,
-        filters: filterOptions
-      }));
-    });
+    // TODO configure
+    const url = 'http://0.0.0.0:9000'
+    
+    const remoteDB = PouchDB(`${url}/wodmeup`);
+    const localDB = PouchDB('wodmeup')
+    remoteDB.replicate.to(localDB);
+    
+    remoteDB.get('barbell')
+      .then(doc => console.log('Doc=>', doc))
+      .catch((err) => {console.log('Error=>', err)})
+    
+    localDB.get('barbell')
+      .then(doc => console.log('Doc=>', doc))
+      .catch((err) => {console.log('Error=>', err)})
+    
+    localDB.find({selector: {type: 'movement'}}, (err, result) => {
+      console.log(err, result);
+    })
+      // .then((result) => console.log(result))
+      // .catch((err) => console.log(err))
+
+    // Sync data
+    // TODO uncomment this snippet after hooking pouchDB.
+    //
+    // const p = syncData();
+    // p.then((data) => {
+    //   let { workouts, filters } = data;
+    //
+    //   let filterOptions = {}
+    //   Object.keys(data.filters).forEach((key) => {
+    //     filterOptions[key] = filters[key].map((option) => { return {...option, value:true}})
+    //   })
+    //
+    //   this.setState(deepmerge(this.state, {
+    //     workouts: workouts,
+    //     filters: filterOptions
+    //   }));
+    // });
   }
 
   _onFilterChanged(id, value, field, options) {

@@ -24,10 +24,8 @@ Findings
 - Fetching this works! http://facebook.github.io/react-native/movies.json
 
 TODO
-[ ] .find isn't working on web. Use indexedDB in web?
+[X] .find isn't working on web. Use indexedDB in web?
+[X] _Try pouch without RWN, with localstorage. If ok then try pouchdbFind_
 [ ] remove utils/data.js
-
-
-
-====> Sidetrack
-[ ] configurable replication url
+[ ] Re-wire filters
+[ ] Reduxify

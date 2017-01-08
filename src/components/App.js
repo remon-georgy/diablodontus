@@ -15,7 +15,7 @@ import deepmerge from 'deepmerge';
 import { applyFilter } from '../utils/filter';
 import { syncData } from '../utils/data';
 
-import PouchDB from 'pouchdb-react-native'
+import PouchDB from 'pouchdb'
 import pouchdbFind from 'pouchdb-find';
 
 const styles = StyleSheet.create({
@@ -87,27 +87,35 @@ export default class WodMeUp extends Component {
    */
   componentWillMount() {
     PouchDB.plugin(pouchdbFind)
-
+    PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
+    
     // TODO configure
     const url = 'http://0.0.0.0:9000'
     
     const remoteDB = PouchDB(`${url}/wodmeup`);
     const localDB = PouchDB('wodmeup')
-    remoteDB.replicate.to(localDB);
+    PouchDB.replicate(remoteDB, localDB, {live: true, retry: true})
+      .on('change', function (info) {
+        console.log(info)
+      }).on('paused', function (err) {
+        console.log(err)
+      }).on('active', function () {
+        console.log('active')
+      }).on('denied', function (err) {
+        console.log(err)
+      }).on('complete', function (info) {
+        console.log(info)
+      }).on('error', function (err) {
+        console.log(err)
+    });
     
-    remoteDB.get('barbell')
-      .then(doc => console.log('Doc=>', doc))
-      .catch((err) => {console.log('Error=>', err)})
-    
-    localDB.get('barbell')
-      .then(doc => console.log('Doc=>', doc))
-      .catch((err) => {console.log('Error=>', err)})
-    
-    localDB.find({selector: {type: 'movement'}}, (err, result) => {
-      console.log(err, result);
-    })
-      // .then((result) => console.log(result))
-      // .catch((err) => console.log(err))
+    localDB.info()
+      .then(doc => console.log('Info=>', doc))
+      .catch((err) => {console.log('InfoError=>', err)})
+  
+    localDB.find({selector: {_id: 'barbell'}})
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err))
 
     // Sync data
     // TODO uncomment this snippet after hooking pouchDB.

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 
 class FilterItem extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     value: PropTypes.bool.isRequired,
     onFilterChecked: PropTypes.func.isRequired
   }
@@ -20,8 +20,8 @@ class FilterItem extends Component {
   }
 
   onValueChanged(value) {
-    const {id, onFilterChecked} = this.props;
-    onFilterChecked(id, value);
+    const {_id, onFilterChecked} = this.props;
+    onFilterChecked(_id, value);
   }
   
   render() {
@@ -48,12 +48,12 @@ class Filter extends Component {
     }
   }
   
-  _onValueChaned(id, value) {
+  _onValueChaned(_id, value) {
     const {field, options} = this.props;
-    this.props.onFilterChanged(id, value, field, options)
+    this.props.onFilterChanged(_id, value, field, options)
   }
   
-  _onAllValueChanged(id, value) {
+  _onAllValueChanged(_id, value) {
     const {field, options} = this.props;
     this.setState({all: value})
     this.props.onFilterAllChanged(value, field, options)
@@ -72,7 +72,7 @@ class Filter extends Component {
     return (
       <View>
         <FilterItem
-          id='all'
+          _id='all'
           name='Check All'
           value={this.state.all}
           onFilterChecked={this._onAllValueChanged}
@@ -89,7 +89,7 @@ class Filter extends Component {
     onFilterChanged: PropTypes.func.isRequired,
     onFilterAllChanged: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       value: PropTypes.bool.isRequired,
     })).isRequired,

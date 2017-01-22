@@ -14,6 +14,7 @@ import Filter from './Filter';
 import deepmerge from 'deepmerge';
 import { applyFilter } from '../utils/filter';
 import { syncData } from '../utils/data';
+import { fromPairs }  from 'lodash'
 
 import PouchDB from 'pouchdb'
 import pouchdbFind from 'pouchdb-find';
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
  * UTILITIES
  ****************************************************/
 function selectedOptions(options) {
-  return options.filter(({value}) => value).map(({id}) => id)
+  return options.filter(({value}) => value).map(({_id}) => _id)
 }
 
 /*****************************************************
@@ -88,10 +89,10 @@ export default class WodMeUp extends Component {
   componentWillMount() {
     PouchDB.plugin(pouchdbFind)
     PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
-    
+  
     // TODO configure
     const url = 'http://0.0.0.0:9000'
-    
+    const _component = this;
     const remoteDB = PouchDB(`${url}/wodmeup`);
     const localDB = PouchDB('wodmeup')
     PouchDB.replicate(remoteDB, localDB, {live: true, retry: true})
@@ -108,37 +109,67 @@ export default class WodMeUp extends Component {
       }).on('error', function (err) {
         console.log(err)
     });
-    
-    localDB.info()
-      .then(doc => console.log('Info=>', doc))
-      .catch((err) => {console.log('InfoError=>', err)})
-  
-    localDB.find({selector: {_id: 'barbell'}})
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err))
 
-    // Sync data
-    // TODO uncomment this snippet after hooking pouchDB.
-    //
-    // const p = syncData();
-    // p.then((data) => {
-    //   let { workouts, filters } = data;
-    //
-    //   let filterOptions = {}
-    //   Object.keys(data.filters).forEach((key) => {
-    //     filterOptions[key] = filters[key].map((option) => { return {...option, value:true}})
-    //   })
-    //
-    //   this.setState(deepmerge(this.state, {
-    //     workouts: workouts,
-    //     filters: filterOptions
-    //   }));
-    // });
+    localDB.find({selector: {type: 'workout'}})
+      .then((result) => {
+        let promises = [
+          localDB.find({
+            selector: {type: 'movement'},
+            fields: ['_id', 'name', 'equipment'],
+          }),
+          localDB.find({
+            selector: {type: 'equipment'},
+            fields: ['_id', 'name'],
+          }),
+          localDB.find({
+            selector: {type: 'tag'},
+            fields: ['_id', 'name'],
+          })
+        ]
+        
+        Promise.all(promises).then(values => {
+          values = values.map(collection => collection.docs.map(doc => {
+            doc.value = true;
+            return doc;
+          }))
+          // Prepare filter options
+          const [movements, equipments, tags] = values;
+          this.setState({
+            filters: {movements, equipments, tags}
+          });
+          // Prepare metadata maps
+          let movementsMap = fromPairs(movements.map(mvmt => {
+            return [mvmt._id, mvmt]
+          }))
+          
+          let workouts = result.docs;
+          workouts.map((workout) => {
+            workout.movements = [];
+            workout.equipments = [];
+      
+            workout.clusters.map((cluster) => {
+              cluster.timing = cluster.timing || {type: 'NoTiming'}
+              cluster.units.map((unit) => {
+                workout.movements.push(unit.movement)
+                const movement = movementsMap[unit.movement]
+                unit.movement = movement
+                workout.equipments = workout.equipments.concat(movement.equipment)
+                return unit
+              })
+              return cluster
+            })
+            return workout;
+          })
+          _component.setState(deepmerge(_component.state, {workouts: workouts}));
+      
+        })
+        .catch((err) => console.log(err))
+    })
   }
 
   _onFilterChanged(id, value, field, options) {
-    const optionsNext = this.state.filters[field].map((option) => {
-      if (option.id === id) {
+      const optionsNext = this.state.filters[field].map((option) => {
+      if (option._id === id) {
         option.value = value
       }
       return option
@@ -173,11 +204,11 @@ export default class WodMeUp extends Component {
     if (this.state.nameFilter !== '') {
       workoutsNext = this.state.workouts.filter(workoutsNameFilter(this.state.nameFilter));
     }
-    
+
     Object.keys(filters).forEach((key) => {
-      workoutsNext = workoutsNext.filter(applyFilter(key, selectedOptions(filters[key])))
+      const selected =  selectedOptions(filters[key])
+      workoutsNext = workoutsNext.filter(applyFilter(key, selected))
     })
-    
     return workoutsNext;
     
   }

@@ -19,7 +19,8 @@
     "react": "15.4.x",
     "react-dom": "15.4.x",
     "react-native": "0.40.x",
-    "react-native-web": "0.0.65"
+    "react-native-web": "0.0.68",
+    "uranium": "github:tuckerconnelly/uranium"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -24,8 +24,14 @@ Findings
 - Fetching this works! http://facebook.github.io/react-native/movies.json
 
 TODO
-[X] .find isn't working on web. Use indexedDB in web?
-[X] _Try pouch without RWN, with localstorage. If ok then try pouchdbFind_
-[ ] remove utils/data.js
-[ ] Re-wire filters
-[ ] Reduxify
+- [x] .find isn't working on web. Use indexedDB in web?
+- [x] Try pouch without RWN, with localstorage. If ok then try pouchdbFind
+- [x] Replicate rethinkdb artifacts
+- ~~~[ ] Try to load data in one operation using populate, join, linked docs..etc~~~
+- [x] - Extract movements and equipments
+- Card component
+- [ ] - filter by mapReduce / pouchFind? or keep array filters?
+- [ ] - sort workouts by name
+- [ ] remove utils/data.js
+- [ ] Re-wire filters
+- [ ] Reduxify

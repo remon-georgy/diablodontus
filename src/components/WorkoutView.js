@@ -1,16 +1,12 @@
-/**
- * @flow
- */
-
 import React, { PropTypes } from 'react';
 import { View, Text } from 'react-native';
-import {isEmpty, reduce} from 'lodash';
+import {isEmpty, reduce, has} from 'lodash';
 
 // TODO refactor
 export const Unit = ({rx, notes, movement}) => {
   let parts = [movement.name];
-
-  if(rx.reps && typeof rx.reps === 'string' && rx.reps.indexOf('./') > -1) {
+  
+  if(has(rx, 'reps') && typeof rx.reps === 'string' && rx.reps.indexOf('./') > -1) {
     const attr = rx.reps.replace('./', '')
     rx.reps = rx[attr]
     delete rx[attr]

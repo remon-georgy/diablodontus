@@ -1,7 +1,3 @@
-/**
- * @flow
- */
-
 import React, { PropTypes } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import WorkoutView from './WorkoutView';

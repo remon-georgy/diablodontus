@@ -13,7 +13,6 @@ import WorkoutsListView from './WorkoutsListView';
 import Filter from './Filter';
 import deepmerge from 'deepmerge';
 import { applyFilter } from '../utils/filter';
-import { syncData } from '../utils/data';
 import { fromPairs }  from 'lodash'
 
 import PouchDB from 'pouchdb'

@@ -147,7 +147,6 @@ export default class WodMeUp extends Component {
             workout.equipments = [];
       
             workout.clusters.map((cluster) => {
-              cluster.timing = cluster.timing || {type: 'NoTiming'}
               cluster.units.map((unit) => {
                 workout.movements.push(unit.movement)
                 const movement = movementsMap[unit.movement]

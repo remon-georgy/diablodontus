@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import {isEmpty, reduce, has} from 'lodash';
+import { Card, CardTitle, CardText} from 'carbon-ui'
 
 // TODO refactor
 export const Unit = ({rx, notes, movement}) => {
@@ -48,42 +49,28 @@ Unit.propTypes = {
 }
 
 /****************************************************
- * Workout -> Scoring
- ***************************************************/
-const Scoring = ({scoring}) => <Text>For {scoring}</Text>
-Scoring.propTypes = {
-  scoring: PropTypes.string.isRequired
-}
-
-/****************************************************
  * Workout -> Cluster -> Timing -> FixedCyclesTiming
  ***************************************************/
-const FixedCyclesTiming = ({alias, deathBy, time, cycles}) => {
+const FixedCyclesTiming = ({deathBy, time, cycles}) => {
   let parts = []
-  if (alias) {
-    parts.push(alias)
-  }
-  else {
-    const cycle = (time % 60 > 0) ?
-      `${time} seconds`:
-      `${time / 60} minutes`
-    parts.push(cycles)
-    parts.push('cycles of ')
-    parts.push(cycle)
-    parts.push('each')
-  }
+  const cycle = (time % 60 > 0) ?
+    `${time} seconds`:
+    `${time / 60} minutes`
+  parts.push(cycles)
+  parts.push('cycles of ')
+  parts.push(cycle)
+  parts.push('each')
   if (deathBy) {
     parts.push('(Score is total number of completed cycles, plus number of reps completed in first incomplete cycle.)')
   }
 
   return (
     <Text>
-      {parts.join(' ')}
+      {parts.join(' ') + '\n'}
     </Text>
   )
 }
 FixedCyclesTiming.propTypes = {
-  alias: PropTypes.string,
   deathBy: PropTypes.bool,
   time: PropTypes.number.isRequired,
   cycles: PropTypes.number
@@ -92,32 +79,28 @@ FixedCyclesTiming.propTypes = {
 /****************************************************
  * Workout -> Cluster -> Timing -> CappedTiming
  ***************************************************/
-const CappedTiming = ({alias, time}) => {
-  let parts = alias ? [alias] : ['In', time / 60, 'minutes']
+const CappedTiming = ({time}) => {
+  let parts = ['In', time / 60, 'minutes']
   
   return (
      <Text>
-       {parts.join(' ')}
+       {parts.join(' ') + '\n'}
      </Text>
    )
 }
 CappedTiming.propTypes = {
-  alias: PropTypes.string,
   time: PropTypes.number.isRequired
 }
 
 /****************************************************
  * Workout -> Cluster -> Timing
  ***************************************************/
-const Timing = ({type, ...rest}) => {
+const Timing = ({type, alias, ...rest}) => {
   let output
+  if (alias) {
+    return <Text>{alias}{'\n'}</Text>
+  }
   switch (type) {
-    //////////////////
-    // TODO IF THER'S AN ALIAS, DISPLAY IT THEN RETURN EARLY
-    // TODO don't check for alias in timing Components
-    ////////////////////
-    
-    // EMOM, Tabata, Fixed cycles in general
     case 'FixedCycles':
       output = <FixedCyclesTiming {...rest} />
       break;
@@ -129,9 +112,10 @@ const Timing = ({type, ...rest}) => {
     default:
       output = null
   }
-  return output
+  return output;
 }
 Timing.propTypes = {
+  alias: PropTypes.string,
   type: PropTypes.string.isRequired
 }
 
@@ -140,10 +124,10 @@ Timing.propTypes = {
  ***************************************************/
 const RepScheme = ({repScheme}) => {
   if (Array.isArray(repScheme)) {
-    return <Text>{repScheme.join(', ') + ' reps'}</Text>
+    return <Text>{repScheme.join(', ') + ' reps'}{'\n'}</Text>
   }
   else if (typeof repScheme === 'string') {
-    return <Text>{repScheme}</Text>
+    return <Text>{repScheme}{'\n'}</Text>
   }
   else if (typeof repScheme === 'object' && repScheme !== null) {
     var {init, step, end = 10} = repScheme
@@ -152,7 +136,7 @@ const RepScheme = ({repScheme}) => {
       reps.push(init + i*step);
     }
     
-    return <Text>{reps.join(', ') + '...etc'}</Text>;
+    return <Text>{reps.join(', ') + '...etc'}{'\n'}</Text>;
   }
   return null;
 }
@@ -174,7 +158,7 @@ RepScheme.propTypes = {
 const Cluster = ({name, timing, units, rounds, builtinRest, repScheme, notes}) => {
   const unitsRend = units.map((unit, u) => {
     return (
-      <Unit key={u} {...unit}/>
+      <Text key={u}><Unit {...unit}/>{'\n'}</Text>
     );
   });
   
@@ -185,19 +169,21 @@ const Cluster = ({name, timing, units, rounds, builtinRest, repScheme, notes}) =
   }
 
   return (
-    <View>
-      {name && <Text>{name}</Text>}
-      {timing && <Timing {...timing} /> }
-      {rounds && <Text>{rounds} Rounds</Text>}
+    <Text>
+      {name && <Text>name{'\n'}</Text>}
+      {/* @FIXME remove this condition */}
+      {timing && timing.type !== 'TimedUnits' && <Timing {...timing} />}
+
+      {rounds && <Text>{rounds} Rounds{'\n'}</Text>}
       {repScheme && <RepScheme repScheme={repScheme} /> }
-      <View>{unitsRend}</View>
-      { !isEmpty(suffix) && <Text>{suffix}</Text> }
-    </View>
+      {unitsRend}
+      { !isEmpty(suffix) && <Text>{suffix}{'\n'}</Text> }
+    </Text>
   );
 }
 Cluster.propTypes = {
   name: PropTypes.string,
-  timing: PropTypes.object.isRequired,
+  timing: PropTypes.object,
   units: PropTypes.array.isRequired,
   rounds: PropTypes.number,
   builtinRest: PropTypes.object,
@@ -216,22 +202,28 @@ Cluster.propTypes = {
 /****************************************************
  * Workout
  ***************************************************/
-const WorkoutView = ({ name, scoring, clusters, notes}) => {
+const WorkoutView = ({ name, scoring, clusters, notes, style}) => {
   const rendClusters = clusters.map((cluster, i) => {
     return <Cluster
       key={i}
       {...cluster} />
   });
   
+  const cardProps = { title: name };
+  if (scoring) {
+    cardProps.subtitle = `For ${scoring}`;
+  }
+  
   return (
-    <View>
-      <Text>{name}</Text>
-      <Scoring scoring={scoring} />
-      <View>{rendClusters}</View>
-      {notes &&
-        <Text>{notes.join('\n')}</Text>
-      }
-    </View>
+    <Card style={style}>
+      <CardTitle {...cardProps} />
+      <CardText>
+        {rendClusters}
+        {notes &&
+          <Text>{notes.join('\n')}</Text>
+        }
+      </CardText>
+    </Card>
   );
 }
 WorkoutView.propTypes = {

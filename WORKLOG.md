@@ -3,12 +3,10 @@ TODO
 - [x] - Extract movements and equipments
 - Card component
 - [X] props.style display
+- [ ] Redux
+- [ ] Unit tests
 - [ ] Nice looking and perfecty working
 - filters
 - sorts
 - pagers
 Use pouchFind
-- [ ] Unit tests
-- [ ] filter by mapReduce / pouchFind? or keep array filters?
-- [ ] sort workouts by name
-- [ ] remove utils/data.js
